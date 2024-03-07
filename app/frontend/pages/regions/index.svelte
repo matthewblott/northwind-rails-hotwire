@@ -1,0 +1,32 @@
+<script lang="ts">
+  import { inertia } from "@inertiajs/svelte";
+  import Pager from "../../components/Pager.svelte";
+  import { onMount } from "svelte";
+  export let regions = [];
+  export let pagy = {};
+
+  onMount(() => {
+    document.title = "Regions";
+  });
+</script>
+
+<h1>Regions</h1>
+<Pager {pagy} baseUrl="/regions" />
+<spacer data-2xs />
+
+<table>
+  <thead>
+    <tr>
+      <th>Region Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {#each regions as region}
+      <tr>
+        <td title="Region Name">
+          <a href={`/regions/${region.id}`} use:inertia>{region.name}</a>
+        </td>
+      </tr>
+    {/each}
+  </tbody>
+</table>
