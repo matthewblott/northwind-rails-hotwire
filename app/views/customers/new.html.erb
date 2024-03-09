@@ -1,0 +1,8 @@
+<h1>New customer</h1>
+
+<controls>
+  <button form="customer_form">Create</button>
+  <%= link_to "Back", customers_path, role: "button" %>
+</controls>
+
+<%= render "form", customer: @customer, disabled: false %>

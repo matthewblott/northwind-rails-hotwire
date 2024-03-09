@@ -1,0 +1,44 @@
+<%= form_with(model: customer_address) do |form| %>
+
+    <field>
+      <%= form.label :address %>
+      <%= form.text_field :address %>
+    </field>
+
+    <field>
+      <%= form.label :city %>
+      <%= form.text_field :city %>
+    </field>
+
+    <field>
+      <%= form.label :region %>
+      <%= form.text_field :region %>
+    </field>
+
+    <field>
+      <%= form.label :postal_code %>
+      <%= form.text_field :postal_code %>
+    </field>
+
+    <field>
+      <%= form.label :country %>
+      <%= form.text_field :country %>
+    </field>
+
+
+  <% if customer_address.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(customer_address.errors.count, "error") %> prohibited this customer_address from being saved:</h2>
+
+      <ul>
+        <% customer_address.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

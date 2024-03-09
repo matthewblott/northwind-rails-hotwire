@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @shipper %>
+
+<div>
+  <%= link_to "Edit this shipper", edit_shipper_path(@shipper) %> |
+  <%= link_to "Back to shippers", shippers_path %>
+
+  <%= button_to "Destroy this shipper", @shipper, method: :delete %>
+</div>

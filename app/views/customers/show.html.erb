@@ -1,0 +1,10 @@
+<h1>Customer</h1>
+<%= turbo_stream_from @customer %>
+
+<controls>
+  <%= link_to "Edit", edit_customer_path(@customer), role: "button" %>
+  <%= link_to "Addresses", customer_addresses_path, role: "button" %>
+  <%= link_to "Back", customers_path, role: "button" %>
+</controls>
+
+<%= render "form", customer: @customer, disabled: true %>

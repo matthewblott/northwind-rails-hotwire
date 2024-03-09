@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Supplier addresses</h1>
+
+<div id="supplier_addresses">
+  <% @supplier_addresses.each do |supplier_address| %>
+    <%= render supplier_address %>
+    <p>
+      <%= link_to "Show this supplier address", supplier_address %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New supplier address", new_supplier_address_path %>

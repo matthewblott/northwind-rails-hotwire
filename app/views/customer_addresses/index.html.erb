@@ -1,0 +1,24 @@
+<h1>Customer Addresses</h1>
+
+<%= render partial: "pager", locals: { pagy: @pagy, path: customer_addresses_path, new_path: new_customer_address_path } %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Customer Address Id</th>
+      <th>Company Name</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @customer_addresses.each do |customer_address| %>
+      <tr>
+        <td title="Customer Address Id">
+          <%= customer_address.id %>
+        </td>
+        <td title="Company Name">
+          <%= customer_address.address_id %> 
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
