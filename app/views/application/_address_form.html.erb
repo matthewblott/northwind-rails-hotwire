@@ -1,0 +1,37 @@
+<%= form_with(model: address, url: false, :html => {:id => 'address_form'}) do |f| %>
+
+  <fieldset>
+    <field>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </field>
+    <field>
+      <%= f.label :address_line_1 %>
+      <%= f.text_field :address_line_1 %>
+    </field>
+    <field>
+      <%= f.label :address_line_2 %>
+      <%= f.text_field :address_line_2 %>
+    </field>
+    <field>
+      <%= f.label :postal_town %>
+      <%= f.text_field :postal_town %>
+    </field>
+    <field>
+      <%= f.label :county %>
+      <%= f.text_field :county %>
+    </field>
+    <field>
+      <%= f.label :post_code %>
+      <%= f.text_field :post_code %>
+    </field>
+    <field>
+      <%= f.label :country %>
+      <%= f.text_field :country %>
+    </field>
+  </fieldset>
+
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>
