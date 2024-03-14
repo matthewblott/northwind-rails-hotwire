@@ -1,44 +1,45 @@
-<%= form_with(model: customer_address) do |form| %>
+<div style="height: 10px">
+</div>
+
+<%= form_with(model: customer, method: 'patch', :html => {:id => 'customer_address_form'}) do |form| %>
+
+  <%= form.fields_for :addresses, customer.addresses.last do |address_form| %>
+
 
     <field>
-      <%= form.label :address %>
-      <%= form.text_field :address %>
+      <%= form.hidden_field :id %>
     </field>
 
+  <fieldset>
     <field>
-      <%= form.label :city %>
-      <%= form.text_field :city %>
+      <%= address_form.label :name %>
+      <%= address_form.text_field :name %>
     </field>
-
     <field>
-      <%= form.label :region %>
-      <%= form.text_field :region %>
+      <%= address_form.label :address_line_1 %>
+      <%= address_form.text_field :address_line_1 %>
     </field>
-
     <field>
-      <%= form.label :postal_code %>
-      <%= form.text_field :postal_code %>
+      <%= address_form.label :address_line_2 %>
+      <%= address_form.text_field :address_line_2 %>
     </field>
-
     <field>
-      <%= form.label :country %>
-      <%= form.text_field :country %>
+      <%= address_form.label :postal_town %>
+      <%= address_form.text_field :postal_town %>
     </field>
-
-
-  <% if customer_address.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(customer_address.errors.count, "error") %> prohibited this customer_address from being saved:</h2>
-
-      <ul>
-        <% customer_address.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+      <field>
+        <%= address_form.label :county %>
+        <%= address_form.text_field :county %>
+      </field>
+      <field>
+        <%= address_form.label :post_code %>
+        <%= address_form.text_field :post_code %>
+      </field>
+      <field>
+        <%= address_form.label :country %>
+        <%= address_form.text_field :country %>
+      </field>
+    </fieldset>
   <% end %>
 
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>

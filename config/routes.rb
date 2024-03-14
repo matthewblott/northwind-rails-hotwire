@@ -6,10 +6,11 @@ Rails.application.routes.draw do
   # # =========================================================================
   # # Addresses
   # # =========================================================================
+
   # resources(:addresses, only: [:index, :search, :show, :new, :create, :edit, :update, :destroy])
   # post("/addresses/new", to: "addresses#create")
-  # patch("/addresses/:id/edit", to: "addresses#update")
-  # put("/addresses/:id/edit", to: "addresses#update")
+  # patch("/addresses/:id", to: "addresses#update")
+  # put("/addresses/:id", to: "addresses#update")
   # post("/addresses/search", to: "addresses#search")
 
   # # =========================================================================
@@ -25,31 +26,30 @@ Rails.application.routes.draw do
   # Customers
   # =========================================================================
 
-  resources(:customers, only: [:index, :search, :show, :new, :create, :edit, :update])
-  post("customers/search", to: "customers#search")
-  post("/customers/new", to: "customers#create")
-  patch("/customers/:id/edit", to: "customers#update")
-  put("/customers/:id/edit", to: "customers#update")
+  resources(:customers, only: [:index, :show, :new, :create, :edit, :update])
+  # post("customers/search", to: "customers#search", as: "customers_search")
 
   # =========================================================================
   # Customer Addresses
   # =========================================================================
 
-  resources(:customer_addresses, only: [:index, :show, :new, :create, :edit, :update])
-  get("/customers/:customer_id/addresses/new", to: "customer_addresses#new")
-  get("/customers/:customer_id/addresses", to: "customer_addresses#index")
+  # resources(:customer_addresses, only: [:index, :show, :create, :edit, :update])
+  get("/customers/:customer_id/addresses", to: "customer_addresses#index", as: "index_customer_address")
+  get("/customers/:customer_id/addresses/new", to: "customer_addresses#new", as: "new_customer_address")
+  get("/customers/:customer_id/addresses/:address_id", to: "customer_addresses#show", as: "show_customer_address")
   get(
-    "/customers/:customer_id/addresses/:address_id",
-    to: "customer_addresses#show",
-    as: "better_customer_addresses_show"
+    "/customers/:customer_id/addresses/:address_id/edit",
+    to: "customer_addresses#edit",
+    as: "edit_customer_address"
   )
-  get("/customers/:customer_id/addresses/:address_id/edit", to: "customer_addresses#edit")
 
-  post("/customers/:customer_id/addresses/new", to: "customer_addresses#create")
-  patch("/customers/:customer_id/addresses/:address_id/edit", to: "customer_addresses#update")
-  put("/customers/:customer_id/addresses/:address_id/edit", to: "customer_addresses#update")
-  delete("/customers/:customer_id/addresses/:address_id", to: "customer_addresses#destroy")
-  post("/customers/:customer_id/addresses/search", to: "customer_addresses#search")
+  post("/customers/:customer_id/addresses", to: "customer_addresses#create", as: "create_customer_address")
+  patch("/customers/:customer_id/addresses/:address_id", to: "customer_addresses#update", as: "update_customer_address")
+  delete(
+    "/customers/:customer_id/addresses/:address_id",
+    to: "customer_addresses#destroy",
+    as: "destroy_customer_address"
+  )
 
   # =========================================================================
   # Employees
@@ -73,7 +73,7 @@ Rails.application.routes.draw do
   # get(
   #   "/employees/:employee_id/addresses/:address_id",
   #   to: "employee_addresses#show",
-  #   as: "better_employee_addresses_show"
+  #   as: "employee_addresses_show"
   # )
   # get("/employees/:employee_id/addresses/:address_id/edit", to: "employee_addresses#edit")
   #
@@ -99,7 +99,7 @@ Rails.application.routes.draw do
   # resources(:order_items, only: [:index, :show, :new, :create, :edit, :update])
   # get("/orders/:order_id/items/new", to: "order_items#new")
   # get("/orders/:order_id/items", to: "order_items#index")
-  # get("/orders/:order_id/items/:product_id", to: "order_items#show", as: "better_order_items_show")
+  # get("/orders/:order_id/items/:product_id", to: "order_items#show", as: "order_items_show")
   # get("/orders/:order_id/items/:product_id/edit", to: "order_items#edit")
   #
   # post("/orders/:order_id/items/new", to: "order_items#create")
@@ -153,7 +153,7 @@ Rails.application.routes.draw do
   # get(
   #   "/suppliers/:supplier_id/addresses/:address_id",
   #   to: "supplier_addresses#show",
-  #   as: "better_supplier_addresses_show"
+  #   as: "supplier_addresses_show"
   # )
   # get("/suppliers/:supplier_id/addresses/:address_id/edit", to: "supplier_addresses#edit")
   #

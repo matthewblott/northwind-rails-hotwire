@@ -3,7 +3,7 @@
 
 <controls>
   <%= link_to "Edit", edit_customer_path(@customer), role: "button" %>
-  <%= link_to "Addresses", customer_addresses_path, role: "button" %>
+  <%= link_to "Addresses", index_customer_address_path(@customer), role: "button" %>
   <%= link_to "Back", customers_path, role: "button" %>
 </controls>
 

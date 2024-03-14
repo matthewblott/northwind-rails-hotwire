@@ -18,6 +18,13 @@ class Customer < ApplicationRecord
 
   broadcasts_refreshes
 
+  # has_many :customer_addresses
+  # has_many :addresses, through: :customer_addresses
+
+  has_and_belongs_to_many :addresses, inverse_of: :customers
+
+  accepts_nested_attributes_for :addresses
+
   has_many :orders
 
 end
