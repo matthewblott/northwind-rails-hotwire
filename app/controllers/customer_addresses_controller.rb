@@ -32,7 +32,7 @@ class CustomerAddressesController < ApplicationController
 
       address_id = @customer.addresses.last.id
 
-      render(:new, status: :see_other)
+      # render(:new, status: :see_other)
       redirect_to(
         show_customer_address_path(customer_id, address_id),
         notice: "Address was successfully created.",
