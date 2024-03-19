@@ -1,0 +1,8 @@
+<% employees.each do |employee| %>
+  <div>
+    <a data-action="search-results#select" href="#">
+      <%= hidden_field_tag :employee_id, employee.id %>
+      <%= highlight((employee.first_name + " " +  employee.last_name), params[:q]) %>
+    </a>
+  </div>
+<% end %>

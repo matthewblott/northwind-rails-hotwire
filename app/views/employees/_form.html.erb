@@ -1,17 +1,30 @@
-<%= form_with(model: employee) do |form| %>
-  <% if employee.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+<div style="height: 10px">
+</div>
 
-      <ul>
-        <% employee.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<form action="<%= search_employee_path %>" id="search-form" method="post"></form>
 
-  <div>
-    <%= form.submit %>
-  </div>
+<%= form_with(url: false, :html => {:id => 'employee_form'}) do %>
+  <fieldset <%= 'disabled' if disabled %>>
+    <%= field(@employee, :email) %>
+    <%= field(@employee, :title_of_courtesy) %>
+    <%= field(@employee, :first_name) %>
+    <%= field(@employee, :last_name) %>
+
+    <field data-controller="search-field" id="message">
+      <%= label(@employee, :reports_to) %> 
+      <input type="hidden" id="reports_to" name="reports_to" value="<%= @employee.reports_to %>"  data-search-field-target="code">
+      <input type="search" name="q" value="<%= @employee.manager.first_name + ' ' + @employee.manager.last_name %>" data-search-field-target="query" form="search-form" data-action="input->search-field#search">
+      <button form="search-form" type="submit" data-search-field-target="submit" style="display: none;"></button>
+      <span data-search-field-target="display"></span>
+    </field>
+
+    <div id="search_results" data-controller="search-results" data-search-results-search-field-outlet="#message"
+      data-search-results-target="container"></div>
+        
+    <%= field(@employee, :birth_date) %>
+    <%= field(@employee, :hire_date) %>
+    <%= field(@employee, :home_phone) %>
+    <%= field(@employee, :extension) %>
+    <%= field(@employee, :photo) %>
+  </fieldset>
 <% end %>

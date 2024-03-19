@@ -1,14 +1,28 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Suppliers</h1>
 
-<div id="suppliers">
-  <% @suppliers.each do |supplier| %>
-    <%= render supplier %>
-    <p>
-      <%= link_to "Show this supplier", supplier %>
-    </p>
-  <% end %>
-</div>
+<%= render partial: "pager", locals: { pagy: @pagy, path: index_supplier_path, new_path: new_supplier_path } %>
 
-<%= link_to "New supplier", new_supplier_path %>
+<table>
+  <thead>
+    <tr>
+      <th>Supplier Id</th>
+      <th>Company Name</th>
+      <th>Region</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @suppliers.each do |supplier| %>
+      <tr>
+        <td title="Supplier Id">
+          <%= link_to supplier.id, show_supplier_path(supplier) %>
+        </td>
+        <td title="Company Name">
+          <%= supplier.company_name %> 
+        </td>
+        <td title="Region">
+          <%= supplier.region %> 
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

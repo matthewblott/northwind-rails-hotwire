@@ -1,10 +1,12 @@
-<h1>Editing customer</h1>
+<h1>Editing Customer</h1>
 
 <%= turbo_stream_from @customer %>
 
 <controls>
-  <button form="customer_form">Update</button>
-  <%= link_to "Back", @customer, role: "button" %>
+  <%= button_tag "Update", form: "customer_form", formaction: update_customer_path(@customer), method: :patch %>
+  <%= link_to "Back", show_customer_path(@customer), role: "button" %>
 </controls>
 
-<%= render "form", customer: @customer, disabled: false %>
+<input type="hidden" name="_method" value="patch" form="customer_form">
+
+<%= render "form", disabled: false %>

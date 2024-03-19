@@ -7,17 +7,8 @@ class CustomersController < ApplicationController
     @pagy, @customers = pagy(Customer.all, items: count)
   end
 
-  def search
-    query = params[:search]
-    records = Customer.name_like(query)
-
-    @records = records.map { |m| Hash[m.id => m.id + " " + m.company_name] }
-
-    render(json: @records)
-  end
-
   def show
-    @customer = Customer.find(params[:id])
+    @customer = Customer.find(customer_id)
   end
 
   def edit
@@ -29,9 +20,8 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.new(customer_params)
-
     if @customer.save
-      redirect_to(@customer, notice: "Customer was successfully created.")
+      redirect_to(show_customer_path(@customer), notice: "Customer was successfully created.")
     else
       render(:new, status: :unprocessable_entity)
     end
@@ -39,7 +29,7 @@ class CustomersController < ApplicationController
 
   def update
     if @customer.update(customer_params)
-      redirect_to(@customer, notice: "Customer was successfully updated.", status: :see_other)
+      redirect_to(show_customer_path(@customer), notice: "Customer was successfully updated.", status: :see_other)
     else
       render(:edit, status: :unprocessable_entity)
     end
@@ -47,25 +37,25 @@ class CustomersController < ApplicationController
 
   def destroy
     @customer.destroy!
-    redirect_to(people_url, notice: "Customer was successfully destroyed.", status: :see_other)
+    redirect_to(index_customer_path, notice: "Customer was successfully destroyed.", status: :see_other)
   end
 
   private
   def set_customer
-    @customer = Customer.find(params[:id])
+    @customer = Customer.find(customer_id)
+  end
+
+  def customer_id
+    params[:customer_id]
   end
 
   def customer_params
-    params.require(:customer).permit(
+    params.permit(
       :id,
       :company_name,
       :contact_name,
       :contact_title,
-      :address,
-      :city,
       :region,
-      :postal_code,
-      :country,
       :phone,
       :fax
     )

@@ -1,10 +1,10 @@
-<p style="color: green"><%= notice %></p>
+<h1>Supplier</h1>
+<%= turbo_stream_from @supplier %>
 
-<%= render @supplier %>
+<controls>
+  <%= link_to "Edit", edit_supplier_path(@supplier), role: "button" %>
+  <%= link_to "Addresses", index_supplier_address_path(@supplier), role: "button" %>
+  <%= link_to "Back", index_supplier_path, role: "button" %>
+</controls>
 
-<div>
-  <%= link_to "Edit this supplier", edit_supplier_path(@supplier) %> |
-  <%= link_to "Back to suppliers", suppliers_path %>
-
-  <%= button_to "Destroy this supplier", @supplier, method: :delete %>
-</div>
+<%= render "form", supplier: @supplier, disabled: true %>

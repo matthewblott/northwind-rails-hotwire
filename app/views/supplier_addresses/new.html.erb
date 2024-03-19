@@ -1,9 +1,8 @@
-<h1>New supplier address</h1>
+<h1>New Supplier Address</h1>
 
-<%= render "form", supplier_address: @supplier_address %>
+<controls>
+  <%= button_tag "Create", form: "address_form", formaction: create_supplier_address_path(params[:supplier_id]) %>
+  <%= link_to "Back", index_supplier_address_path(params[:supplier_id]), role: "button" %>
+</controls>
 
-<br>
-
-<div>
-  <%= link_to "Back to supplier addresses", supplier_addresses_path %>
-</div>
+<%= render "address_form", address: @address %>

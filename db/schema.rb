@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_12_200824) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_16_161114) do
   create_table "addresses", force: :cascade do |t|
     t.string "name", limit: 50
     t.string "address_line_1", limit: 100
@@ -25,6 +25,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_12_200824) do
 
   create_table "addresses_customers", primary_key: ["customer_id", "address_id"], force: :cascade do |t|
     t.string "customer_id"
+    t.integer "address_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "addresses_employees", primary_key: ["employee_id", "address_id"], force: :cascade do |t|
+    t.integer "employee_id"
+    t.integer "address_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "addresses_suppliers", primary_key: ["supplier_id", "address_id"], force: :cascade do |t|
+    t.integer "supplier_id"
     t.integer "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -45,13 +59,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_12_200824) do
     t.string "region", limit: 50
     t.string "phone", limit: 50
     t.string "fax", limit: 50
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "employee_addresses", primary_key: ["employee_id", "address_id"], force: :cascade do |t|
-    t.integer "employee_id"
-    t.integer "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -123,13 +130,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_12_200824) do
   create_table "shippers", force: :cascade do |t|
     t.string "company_name", limit: 50
     t.string "phone", limit: 50
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "supplier_addresses", primary_key: ["supplier_id", "address_id"], force: :cascade do |t|
-    t.integer "supplier_id"
-    t.integer "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

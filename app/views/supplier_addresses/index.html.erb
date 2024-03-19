@@ -1,14 +1,39 @@
-<p style="color: green"><%= notice %></p>
+<h1>Supplier Addresses</h1>
 
-<h1>Supplier addresses</h1>
+<controls>
+  <%= link_to "New", new_supplier_address_path(@supplier.id), role: "button" %>
+  <%= link_to "Back", index_supplier_path(@supplier.id), role: "button" %>
+</controls>
 
-<div id="supplier_addresses">
-  <% @supplier_addresses.each do |supplier_address| %>
-    <%= render supplier_address %>
-    <p>
-      <%= link_to "Show this supplier address", supplier_address %>
-    </p>
+<table>
+  <thead>
+    <tr>
+      <th>Supplier Id</th>
+      <th>Address Id</th>
+      <th>Address Line 1</th>
+      <th>Postal Town</th>
+      <th>Post Code</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @supplier.addresses.each do |address| %>
+    <tr>
+      <td title="Supplier Id">
+        <%= link_to @supplier.id, show_supplier_address_path(@supplier.id, address.id) %>
+      </td>
+      <td title="Address Id">
+        <%= address.id %>
+      </td>
+      <td title="Address Line 1">
+        <%= address.address_line_1 %>
+      </td>
+      <td title="Postal Town">
+        <%= address.postal_town %>
+      </td>
+      <td title="Post Code">
+        <%= address.post_code %>
+      </td>
+    </tr>
   <% end %>
-</div>
-
-<%= link_to "New supplier address", new_supplier_address_path %>
+  </tbody>
+</table>

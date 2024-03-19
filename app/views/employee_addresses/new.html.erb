@@ -1,9 +1,8 @@
-<h1>New employee address</h1>
+<h1>New Employee Address</h1>
 
-<%= render "form", employee_address: @employee_address %>
+<controls>
+  <%= button_tag "Create", form: "address_form", formaction: create_employee_address_path(params[:employee_id]) %>
+  <%= link_to "Back", index_employee_address_path(params[:employee_id]), role: "button" %>
+</controls>
 
-<br>
-
-<div>
-  <%= link_to "Back to employee addresses", employee_addresses_path %>
-</div>
+<%= render "address_form", address: @address %>

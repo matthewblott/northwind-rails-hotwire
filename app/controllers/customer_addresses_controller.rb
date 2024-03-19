@@ -1,5 +1,5 @@
 class CustomerAddressesController < ApplicationController
-  before_action :set_address, only: %i[show edit]
+  before_action :set_address, only: %i[show edit update]
 
   def index
     @customer = Customer.find(customer_id)
@@ -28,13 +28,15 @@ class CustomerAddressesController < ApplicationController
         status: :see_other
       )
     else
+      @address = address
       render(:new, status: :unprocessable_entity)
     end
   end
 
   def update
-    customer = Customer.find(customer_id)
-    if customer.addresses.update(address_params)
+    @address = Address.find(address_id)
+
+    if @address.update(address_params)
       redirect_to(
         show_customer_address_path(customer_id, address_id),
         notice: "Address was successfully updated.",
@@ -62,7 +64,7 @@ class CustomerAddressesController < ApplicationController
   end
 
   def address_params
-    params.require(:address).permit(
+    params.permit(
       :name,
       :address_line_1,
       :address_line_2,

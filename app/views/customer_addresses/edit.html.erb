@@ -11,4 +11,4 @@
   <input type="hidden" name="customer_id" value=<%= params[params[:customer_id]] %>>
 <% end %>
 
-<%= render partial: "address_form", locals: { address: @address } %>
+<%= render "address_form", address: @address %>

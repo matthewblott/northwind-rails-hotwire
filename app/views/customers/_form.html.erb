@@ -1,56 +1,14 @@
 <div style="height: 10px">
 </div>
 
-<%= form_with(model: customer, :html => {:id => 'customer_form'}) do |form| %>
-
-  <% if disabled %>
-    <fieldset disabled>
-  <% else %>
-    <fieldset>
-  <% end %>
-
-    <field>
-      <%= form.label :id %>
-      <%= form.text_field :id %>
-    </field>
-
-    <field>
-      <%= form.label :company_name %>
-      <%= form.text_field :company_name %>
-    </field>
-    
-    <field>
-      <%= form.label :contact_name %>
-      <%= form.text_field :contact_name %>
-    </field>
-    
-    <field>
-      <%= form.label :contact_title %>
-      <%= form.text_field :contact_title %>
-    </field>
-    
-    <field>
-      <%= form.label :phone %>
-      <%= form.text_field :phone %>
-    </field>
-
-    <field>
-      <%= form.label :fax %>
-      <%= form.text_field :fax %>
-    </field>
-
+<%= form_with(url: false, :html => {:id => 'customer_form'}) do %>
+  <fieldset <%= 'disabled' if disabled %>>
+    <%= field(@customer, :id) %>
+    <%= field(@customer, :company_name) %>
+    <%= field(@customer, :contact_name) %>
+    <%= field(@customer, :contact_title) %>
+    <%= field(@customer, :phone) %>
+    <%= field(@customer, :fax) %>    
   </fieldset>
-
-  <% if customer.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
-
-      <ul>
-        <% customer.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
 <% end %>
+

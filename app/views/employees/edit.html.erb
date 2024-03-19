@@ -1,10 +1,18 @@
-<h1>Editing employee</h1>
+<h1>Editing Employee</h1>
 
-<%= render "form", employee: @employee %>
+<%= turbo_stream_from @employee %>
 
-<br>
+<controls>
+  <%= button_tag "Update", form: "employee_form", formaction: update_employee_path(params[:employee_id]), method: :patch %>
+  <%= button_tag "Delete", form: "delete_employee_form" %>
+  <%= link_to "Back", index_employee_path(params[:customer_id]), role: "button" %>
+</controls>
 
-<div>
-  <%= link_to "Show this employee", @employee %> |
-  <%= link_to "Back to employees", employees_path %>
-</div>
+<input type="hidden" name="_method" value="patch" form="employee_form">
+
+<%= form_with method: :delete, url: destroy_employee_path(params[:employee_id], params[:employee_id]), :html => {:id => 'delete_employee_form'} do |form| %>
+  <input type="hidden" name="employee_id" value=<%= params[:employee_id] %>>
+  <input type="hidden" name="customer_id" value=<%= params[params[:employee_id]] %>>
+<% end %>
+
+<%= render "form", disabled: false %>

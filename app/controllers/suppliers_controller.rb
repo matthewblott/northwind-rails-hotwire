@@ -1,14 +1,14 @@
 class SuppliersController < ApplicationController
   include Pagy::Backend
-  before_action :set_supplier, only: %i[ show edit update destroy ]
-  
+  before_action :set_supplier, only: %i[show edit update destroy]
+
   def index
     count = 10
     @pagy, @suppliers = pagy(Supplier.all, items: count)
   end
 
   def show
-    @supplier = Supplier.find(params[:id]) 
+    @supplier = Supplier.find(supplier_id)
   end
 
   def edit
@@ -22,37 +22,43 @@ class SuppliersController < ApplicationController
     @supplier = Supplier.new(supplier_params)
 
     if @supplier.save
-      redirect_to @supplier, notice: "supplier was successfully created."
+      redirect_to(@supplier, notice: "Supplier was successfully created.", status: :see_other)
     else
-      render inertia: 'suppliers/new', props: { 
-        supplier: @supplier,
-        errors: @supplier.errors
-      }
+      render(:new, status: :unprocessable_entity)
     end
   end
 
   def update
     if @supplier.update(supplier_params)
-      redirect_to @supplier, notice: "supplier was successfully updated."
+      redirect_to(@supplier, notice: "Supplier was successfully updated.", status: :see_other)
     else
-      render inertia: 'suppliers/edit', props: { 
-        supplier: @supplier,
-        errors: @supplier.errors
-      }
+      render(:edit, status: :unprocessable_entity)
     end
   end
 
   def destroy
     @supplier.destroy!
-    redirect_to people_url, notice: "supplier was successfully destroyed.", status: :see_other
+    redirect_to(index_supplier_path, notice: "Supplier was successfully destroyed.", status: :see_other)
   end
 
   private
-    def set_supplier
-      @supplier = Supplier.find(params[:id])
-    end
+  def set_supplier
+    @supplier = Supplier.find(supplier_id)
+  end
 
-    def supplier_params
-      params.require(:supplier).permit(:company_name, :contact_name, :contact_title, :address, :city, :region, :postal_code, :country, :phone, :fax)
-    end
+  def supplier_id
+    params[:supplier_id]
+  end
+
+  def supplier_params
+    params.permit(
+      :company_name,
+      :contact_name,
+      :contact_title,
+      :region,
+      :phone,
+      :fax,
+      :homepage
+    )
+  end
 end

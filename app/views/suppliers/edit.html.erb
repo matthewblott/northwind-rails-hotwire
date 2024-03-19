@@ -1,10 +1,16 @@
 <h1>Editing supplier</h1>
 
-<%= render "form", supplier: @supplier %>
+<%= turbo_stream_from @supplier %>
 
-<br>
+<controls>
+  <%= button_tag "Update", form: "supplier_form", formaction: update_supplier_path(params[:supplier_id]), method: :patch %>
+  <%= button_tag "Delete", form: "delete_supplier_form" %>
+  <%= link_to "Back", index_supplier_path(params[:customer_id]), role: "button" %>
+</controls>
 
-<div>
-  <%= link_to "Show this supplier", @supplier %> |
-  <%= link_to "Back to suppliers", suppliers_path %>
-</div>
+<%= form_with method: :delete, url: destroy_supplier_path(params[:supplier_id], params[:supplier_id]), :html => {:id => 'delete_supplier_form'} do |form| %>
+  <input type="hidden" name="supplier_id" value=<%= params[:supplier_id] %>>
+  <input type="hidden" name="customer_id" value=<%= params[params[:supplier_id]] %>>
+<% end %>
+
+<%= render "form", supplier: @supplier, disabled: false %>

@@ -1,17 +1,6 @@
 Rails.application.routes.draw do
   devise_for(:employees, controllers: {sessions: "sessions"})
   resources(:login, only: [:index])
-  # get 'login', to: 'login#index'
-
-  # # =========================================================================
-  # # Addresses
-  # # =========================================================================
-
-  # resources(:addresses, only: [:index, :search, :show, :new, :create, :edit, :update, :destroy])
-  # post("/addresses/new", to: "addresses#create")
-  # patch("/addresses/:id", to: "addresses#update")
-  # put("/addresses/:id", to: "addresses#update")
-  # post("/addresses/search", to: "addresses#search")
 
   # # =========================================================================
   # # Categories
@@ -26,14 +15,27 @@ Rails.application.routes.draw do
   # Customers
   # =========================================================================
 
-  resources(:customers, only: [:index, :show, :new, :create, :edit, :update])
-  # post("customers/search", to: "customers#search", as: "customers_search")
+  get("/customers", to: "customers#index", as: "index_customer")
+  get("/customers/new", to: "customers#new", as: "new_customer")
+  get("/customers/:customer_id", to: "customers#show", as: "show_customer")
+  get(
+    "/customers/:customer_id/edit",
+    to: "customers#edit",
+    as: "edit_customer"
+  )
+
+  post("/customers", to: "customers#create", as: "create_customer")
+  patch("/customers/:customer_id", to: "customers#update", as: "update_customer")
+  delete(
+    "/customers/:customer_id",
+    to: "customers#destroy",
+    as: "destroy_customer"
+  )
 
   # =========================================================================
   # Customer Addresses
   # =========================================================================
 
-  # resources(:customer_addresses, only: [:index, :show, :create, :edit, :update])
   get("/customers/:customer_id/addresses", to: "customer_addresses#index", as: "index_customer_address")
   get("/customers/:customer_id/addresses/new", to: "customer_addresses#new", as: "new_customer_address")
   get("/customers/:customer_id/addresses/:address_id", to: "customer_addresses#show", as: "show_customer_address")
@@ -55,32 +57,45 @@ Rails.application.routes.draw do
   # Employees
   # =========================================================================
 
-  resources(:employees, only: [:index, :search, :show, :new, :create, :edit, :update, :destroy])
-  get("/employees/sign_in", to: "login#index")
-  post("/employees/search", to: "employees#search")
+  get("/employees", to: "employees#index", as: "index_employee")
+  get("/employees/new", to: "employees#new", as: "new_employee")
+  get("/employees/:employee_id", to: "employees#show", as: "show_employee")
+  get(
+    "/employees/:employee_id/edit",
+    to: "employees#edit",
+    as: "edit_employee"
+  )
 
-  post("/employees/new", to: "employees#create")
-  patch("/employees/:id/edit", to: "employees#update")
-  put("/employees/:id/edit", to: "employees#update")
+  post("/employees/search", to: "employees#search", as: "search_employee")
 
-  # # =========================================================================
-  # # Employee Addresses
-  # # =========================================================================
-  #
-  # resources(:employee_addresses, only: [:index, :show, :new, :create, :edit, :update])
-  # get("/employees/:employee_id/addresses/new", to: "employee_addresses#new")
-  # get("/employees/:employee_id/addresses", to: "employee_addresses#index")
-  # get(
-  #   "/employees/:employee_id/addresses/:address_id",
-  #   to: "employee_addresses#show",
-  #   as: "employee_addresses_show"
-  # )
-  # get("/employees/:employee_id/addresses/:address_id/edit", to: "employee_addresses#edit")
-  #
-  # post("/employees/:employee_id/addresses/new", to: "employee_addresses#create")
-  # patch("/employees/:employee_id/addresses/:address_id/edit", to: "employee_addresses#update")
-  # put("/employees/:employee_id/addresses/:address_id/edit", to: "employee_addresses#update")
-  # delete("/employees/:employee_id/addresses/:address_id", to: "employee_addresses#destroy")
+  post("/employees/:employee_id", to: "employees#create", as: "create_employee")
+  patch("/employees/:employee_id", to: "employees#update", as: "update_employee")
+  delete(
+    "/employees/:employee_id",
+    to: "employees#destroy",
+    as: "destroy_employee"
+  )
+
+  # =========================================================================
+  # Employee Addresses
+  # =========================================================================
+
+  get("/employees/:employee_id/addresses", to: "employee_addresses#index", as: "index_employee_address")
+  get("/employees/:employee_id/addresses/new", to: "employee_addresses#new", as: "new_employee_address")
+  get("/employees/:employee_id/addresses/:address_id", to: "employee_addresses#show", as: "show_employee_address")
+  get(
+    "/employees/:employee_id/addresses/:address_id/edit",
+    to: "employee_addresses#edit",
+    as: "edit_employee_address"
+  )
+
+  post("/employees/:employee_id/addresses", to: "employee_addresses#create", as: "create_employee_address")
+  patch("/employees/:employee_id/addresses/:address_id", to: "employee_addresses#update", as: "update_employee_address")
+  delete(
+    "/employees/:employee_id/addresses/:address_id",
+    to: "employee_addresses#destroy",
+    as: "destroy_employee_address"
+  )
 
   # # =========================================================================
   # # Orders
@@ -134,33 +149,47 @@ Rails.application.routes.draw do
   # patch("/shippers/:id/edit", to: "shippers#update")
   # put("/shippers/:id/edit", to: "shippers#update")
 
-  # # =========================================================================
-  # # Suppliers
-  # # =========================================================================
-  #
-  # resources(:suppliers, only: [:index, :show, :new, :create, :edit, :update])
-  # post("/suppliers/new", to: "suppliers#create")
-  # patch("/suppliers/:id/edit", to: "suppliers#update")
-  # put("/suppliers/:id/edit", to: "suppliers#update")
+  # =========================================================================
+  # Suppliers
+  # =========================================================================
+
+  get("/suppliers", to: "suppliers#index", as: "index_supplier")
+  get("/suppliers/new", to: "suppliers#new", as: "new_supplier")
+  get("/suppliers/:supplier_id", to: "suppliers#show", as: "show_supplier")
+  get(
+    "/suppliers/:supplier_id/edit",
+    to: "suppliers#edit",
+    as: "edit_supplier"
+  )
+
+  post("/suppliers/:supplier_id", to: "suppliers#create", as: "create_supplier")
+  patch("/suppliers/:supplier_id", to: "suppliers#update", as: "update_supplier")
+  delete(
+    "/suppliers/:supplier_id",
+    to: "suppliers#destroy",
+    as: "destroy_supplier"
+  )
 
   # # =========================================================================
   # # Supplier Addresses
   # # =========================================================================
-  #
-  # resources(:supplier_addresses, only: [:index, :show, :new, :create, :edit, :update])
-  # get("/suppliers/:supplier_id/addresses/new", to: "supplier_addresses#new")
-  # get("/suppliers/:supplier_id/addresses", to: "supplier_addresses#index")
-  # get(
-  #   "/suppliers/:supplier_id/addresses/:address_id",
-  #   to: "supplier_addresses#show",
-  #   as: "supplier_addresses_show"
-  # )
-  # get("/suppliers/:supplier_id/addresses/:address_id/edit", to: "supplier_addresses#edit")
-  #
-  # post("/suppliers/:supplier_id/addresses/new", to: "supplier_addresses#create")
-  # patch("/suppliers/:supplier_id/addresses/:address_id/edit", to: "supplier_addresses#update")
-  # put("/suppliers/:supplier_id/addresses/:address_id/edit", to: "supplier_addresses#update")
-  # delete("/suppliers/:supplier_id/addresses/:address_id", to: "supplier_addresses#destroy")
+
+  get("/suppliers/:supplier_id/addresses", to: "supplier_addresses#index", as: "index_supplier_address")
+  get("/suppliers/:supplier_id/addresses/new", to: "supplier_addresses#new", as: "new_supplier_address")
+  get("/suppliers/:supplier_id/addresses/:address_id", to: "supplier_addresses#show", as: "show_supplier_address")
+  get(
+    "/suppliers/:supplier_id/addresses/:address_id/edit",
+    to: "supplier_addresses#edit",
+    as: "edit_supplier_address"
+  )
+
+  post("/suppliers/:supplier_id/addresses", to: "supplier_addresses#create", as: "create_supplier_address")
+  patch("/suppliers/:supplier_id/addresses/:address_id", to: "supplier_addresses#update", as: "update_supplier_address")
+  delete(
+    "/suppliers/:supplier_id/addresses/:address_id",
+    to: "supplier_addresses#destroy",
+    as: "destroy_supplier_address"
+  )
 
   # =========================================================================
   # Home

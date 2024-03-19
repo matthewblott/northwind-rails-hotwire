@@ -1,10 +1,10 @@
-<p style="color: green"><%= notice %></p>
+<h1>Employee</h1>
+<%= turbo_stream_from @employee %>
 
-<%= render @employee %>
+<controls>
+  <%= link_to "Edit", edit_employee_path(@employee), role: "button" %>
+  <%= link_to "Addresses", index_employee_address_path(@employee), role: "button" %>
+  <%= link_to "Back", index_employee_path, role: "button" %>
+</controls>
 
-<div>
-  <%= link_to "Edit this employee", edit_employee_path(@employee) %> |
-  <%= link_to "Back to employees", employees_path %>
-
-  <%= button_to "Destroy this employee", @employee, method: :delete %>
-</div>
+<%= render "form", disabled: true %>

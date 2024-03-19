@@ -1,10 +1,14 @@
-<h1>Editing employee address</h1>
+<h1>Edit Employee Address</h1>
 
-<%= render "form", employee_address: @employee_address %>
+<controls>
+  <%= button_tag "Update", form: "address_form", formaction: update_employee_address_path(params[:employee_id], params[:address_id]), method: :patch %>
+  <%= button_tag "Delete", form: "delete_address_form" %>
+  <%= link_to "Back", index_employee_address_path(params[:employee_id]), role: "button" %>
+</controls>
 
-<br>
+<%= form_with method: :delete, url: destroy_employee_address_path(params[:employee_id], params[:address_id]), :html => {:id => 'delete_address_form'} do |form| %>
+  <input type="hidden" name="address_id" value=<%= params[:address_id] %>>
+  <input type="hidden" name="employee_id" value=<%= params[params[:employee_id]] %>>
+<% end %>
 
-<div>
-  <%= link_to "Show this employee address", @employee_address %> |
-  <%= link_to "Back to employee addresses", employee_addresses_path %>
-</div>
+<%= render partial: "address_form", locals: { address: @address } %>

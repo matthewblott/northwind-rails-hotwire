@@ -1,84 +1,81 @@
 class SupplierAddressesController < ApplicationController
-  include Pagy::Backend
-  before_action :set_supplier_address, only: %i[ show edit update destroy ]
-  
+  before_action :set_address, only: %i[show edit]
+
   def index
-    count = 10
-    supplier_id = params[:supplier_id]
-    @pagy, @supplier_addresses = pagy(SupplierAddress.includes(:address).by_supplier(supplier_id), items: count)
-    
-    @addresses = []
-
-    @supplier_addresses.each do |supplier_address|
-      @addresses << supplier_address.address
-    end
-
-    @supplier_id = supplier_id
+    @supplier = Supplier.find(supplier_id)
   end
 
   def show
   end
 
+  def new
+    @address = Address.new
+  end
+
   def edit
   end
 
-  def new
-    @address = Address.new
-    @supplier_address = SupplierAddress.new
-    @supplier_address.supplier_id = params[:supplier_id]
-  end
-
   def create
-    @address = Address.new(address_params)
-    @supplier_address = SupplierAddress.new(supplier_address_params)
-   
-    ActiveRecord::Base.transaction do
-      @address.save!
-      @supplier_address.address_id = @address.id
-      @supplier_address.save!
-      redirect_to better_supplier_addresses_show_path(supplier_id:@supplier_address.supplier_id, address_id:@supplier_address.address_id) 
-    end
+    supplier = Supplier.find(supplier_id)
+    address = supplier.addresses.create(address_params)
+    address_id = address.id
 
-    rescue ActiveRecord::RecordInvalid
-      render inertia: 'supplier_addresses/new', props: { 
-        address: @address,
-        supplier_address: @supplier_address,
-        errors: @address.errors
-      }
+    if address_id != nil
+      redirect_to(
+        show_supplier_address_path(supplier_id, address_id),
+        notice: "Address was successfully created.",
+        status: :see_other
+      )
+    else
+      @address = address
+      render(:new, status: :unprocessable_entity)
+    end
   end
 
   def update
-    if @address.update(address_params)
-      redirect_to better_supplier_addresses_show_path(supplier_id:@supplier_address.supplier_id, address_id:@supplier_address.address_id) 
+    supplier = Supplier.find(supplier_id)
+    if supplier.addresses.update(address_params)
+      redirect_to(
+        show_supplier_address_path(supplier_id, address_id),
+        notice: "Address was successfully updated.",
+        status: :see_other
+      )
     else
-      render inertia: 'supplier_addresses/edit', props: { 
-        address: @address,
-        supplier_address: @supplier_address,
-        errors: @supplier_address.errors
-      }
+      render(:edit, status: :unprocessable_entity)
     end
   end
 
   def destroy
-    supplier_id = @supplier_address.supplier_id
-    @supplier_address.destroy!
-    redirect_to :action => :index, supplier_id: supplier_id
+    supplier = Supplier.find(supplier_id)
+    supplier.addresses.find(address_id).destroy
+    redirect_to(index_supplier_address_path, notice: "Address was successfully destroyed.", status: :see_other)
   end
 
   private
-    def set_supplier_address
-      supplier_id = params[:supplier_id]
-      address_id = params[:address_id]
-      @supplier_address = SupplierAddress.includes(:address).find([supplier_id,address_id])
-      @address = @supplier_address.address
-    end
 
-    def address_params
-      params.require(:address).permit(:name, :address_line_1, :address_line_2, :postal_town, :county, :country, :post_code)
-    end
+  def supplier_id
+    params[:supplier_id]
+  end
 
-    def supplier_address_params
-      params.require(:supplier_address).permit(:supplier_id, :address_id)
-    end
+  def address_id
+    params[:address_id]
+  end
+
+  def address_params
+    params.permit(
+      :name,
+      :address_line_1,
+      :address_line_2,
+      :postal_town,
+      :county,
+      :country,
+      :post_code
+    )
+  end
+
+  def set_address
+    supplier = Supplier.find(supplier_id)
+    @address = supplier.addresses.find(address_id)
+  end
 
 end

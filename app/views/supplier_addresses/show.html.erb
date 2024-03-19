@@ -1,10 +1,8 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @supplier_address %>
+<h1>Supplier Address</h1>
 
 <div>
-  <%= link_to "Edit this supplier address", edit_supplier_address_path(@supplier_address) %> |
-  <%= link_to "Back to supplier addresses", supplier_addresses_path %>
-
-  <%= button_to "Destroy this supplier address", @supplier_address, method: :delete %>
+  <%= link_to "Edit", edit_supplier_address_path(params[:supplier_id], params[:address_id]), role: "button" %>
+  <%= link_to "Back", index_supplier_address_path(params[:supplier_id]), role: "button" %>
 </div>
+
+<%= render partial: "address_form", locals: { address: @address } %>

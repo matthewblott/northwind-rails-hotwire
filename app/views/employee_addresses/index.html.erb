@@ -1,14 +1,39 @@
-<p style="color: green"><%= notice %></p>
+<h1>Employee Addresses</h1>
 
-<h1>Employee addresses</h1>
+<controls>
+  <%= link_to "New", new_employee_address_path(@employee.id), role: "button" %>
+  <%= link_to "Back", show_employee_path(@employee.id), role: "button" %>
+</controls>
 
-<div id="employee_addresses">
-  <% @employee_addresses.each do |employee_address| %>
-    <%= render employee_address %>
-    <p>
-      <%= link_to "Show this employee address", employee_address %>
-    </p>
+<table>
+  <thead>
+    <tr>
+      <th>Employee Id</th>
+      <th>Address Id</th>
+      <th>Address Line 1</th>
+      <th>Postal Town</th>
+      <th>Post Code</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @employee.addresses.each do |address| %>
+    <tr>
+      <td title="Employee Id">
+        <%= link_to @employee.id, show_employee_address_path(@employee.id, address.id) %>
+      </td>
+      <td title="Address Id">
+        <%= address.id %>
+      </td>
+      <td title="Address Line 1">
+        <%= address.address_line_1 %>
+      </td>
+      <td title="Postal Town">
+        <%= address.postal_town %>
+      </td>
+      <td title="Post Code">
+        <%= address.post_code %>
+      </td>
+    </tr>
   <% end %>
-</div>
-
-<%= link_to "New employee address", new_employee_address_path %>
+  </tbody>
+</table>
