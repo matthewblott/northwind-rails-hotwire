@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_16_161114) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_19_171327) do
   create_table "addresses", force: :cascade do |t|
     t.string "name", limit: 50
     t.string "address_line_1", limit: 100
@@ -76,12 +76,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_16_161114) do
     t.date "birth_date"
     t.date "hire_date"
     t.integer "reports_to"
-    t.string "region", limit: 50
     t.string "home_phone", limit: 25
     t.integer "extension"
     t.string "photo", limit: 250
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "region_id"
+    t.index ["region_id"], name: "index_employees_on_region_id"
   end
 
   create_table "order_items", primary_key: ["order_id", "product_id"], force: :cascade do |t|
@@ -146,6 +147,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_16_161114) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "employees", "regions"
 
   create_view "queryable_addresses", sql_definition: <<-SQL
       select

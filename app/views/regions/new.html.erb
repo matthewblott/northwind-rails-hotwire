@@ -1,9 +1,8 @@
-<h1>New region</h1>
+<h1>New Region</h1>
 
-<%= render "form", region: @region %>
+<controls>
+  <%= button_tag "Create", form: "region_form", formaction: create_region_path(@region) %>
+  <%= link_to "Back", index_region_path, role: "button" %>
+</controls>
 
-<br>
-
-<div>
-  <%= link_to "Back to regions", regions_path %>
-</div>
+<%= render "form", disabled: false %>

@@ -1,17 +1,10 @@
-<%= form_with(model: region) do |form| %>
-  <% if region.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(region.errors.count, "error") %> prohibited this region from being saved:</h2>
+<div style="height: 10px">
+</div>
 
-      <ul>
-        <% region.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.submit %>
-  </div>
+<%= form_with(url: false, :html => {:id => 'region_form'}) do %>
+  <fieldset <%= 'disabled' if disabled %>>
+    <%= text_field(@region, :id) %>
+    <%= text_field(@region, :name) %>
+  </fieldset>
 <% end %>
+

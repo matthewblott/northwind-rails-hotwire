@@ -1,13 +1,13 @@
 <%= form_with(model: address, url: false, :html => {:id => 'address_form'}) do |f| %>
   <fieldset>
 
-    <%= field(address, :name) %> 
-    <%= field(address, :address_line_1) %>
-    <%= field(address, :address_line_2) %>
-    <%= field(address, :postal_town) %> 
-    <%= field(address, :county) %> 
-    <%= field(address, :post_code) %> 
-    <%= field(address, :country) %> 
+    <%= text_field(address, :name) %> 
+    <%= text_field(address, :address_line_1) %>
+    <%= text_field(address, :address_line_2) %>
+    <%= text_field(address, :postal_town) %> 
+    <%= text_field(address, :county) %> 
+    <%= text_field(address, :post_code) %> 
+    <%= text_field(address, :country) %> 
 
   </fieldset>
 

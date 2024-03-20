@@ -131,14 +131,26 @@ Rails.application.routes.draw do
   # patch("/products/:id/edit", to: "products#update")
   # put("/products/:id/edit", to: "products#update")
 
-  # # =========================================================================
-  # # Regions
-  # # =========================================================================
-  #
-  # resources(:regions, only: [:index, :show, :new, :create, :edit, :update])
-  # post("/regions/new", to: "regions#create")
-  # patch("/regions/:id/edit", to: "regions#update")
-  # put("/regions/:id/edit", to: "regions#update")
+  # =========================================================================
+  # Regions
+  # =========================================================================
+
+  get("/regions", to: "regions#index", as: "index_region")
+  get("/regions/new", to: "regions#new", as: "new_region")
+  get("/regions/:region_id", to: "regions#show", as: "show_region")
+  get(
+    "/regions/:region_id/edit",
+    to: "regions#edit",
+    as: "edit_region"
+  )
+
+  post("/regions", to: "regions#create", as: "create_region")
+  patch("/regions/:region_id", to: "regions#update", as: "update_region")
+  delete(
+    "/regions/:region_id",
+    to: "regions#destroy",
+    as: "destroy_region"
+  )
 
   # # =========================================================================
   # # Shippers

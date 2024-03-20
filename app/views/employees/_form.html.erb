@@ -5,10 +5,10 @@
 
 <%= form_with(url: false, :html => {:id => 'employee_form'}) do %>
   <fieldset <%= 'disabled' if disabled %>>
-    <%= field(@employee, :email) %>
-    <%= field(@employee, :title_of_courtesy) %>
-    <%= field(@employee, :first_name) %>
-    <%= field(@employee, :last_name) %>
+    <%= email_field(@employee, :email) %>
+    <%= text_field(@employee, :title_of_courtesy) %>
+    <%= text_field(@employee, :first_name) %>
+    <%= text_field(@employee, :last_name) %>
 
     <field data-controller="search-field" id="message">
       <%= label(@employee, :reports_to) %> 
@@ -21,10 +21,10 @@
     <div id="search_results" data-controller="search-results" data-search-results-search-field-outlet="#message"
       data-search-results-target="container"></div>
         
-    <%= field(@employee, :birth_date) %>
-    <%= field(@employee, :hire_date) %>
-    <%= field(@employee, :home_phone) %>
-    <%= field(@employee, :extension) %>
-    <%= field(@employee, :photo) %>
+    <%= date_field(@employee, :birth_date) %>
+    <%= date_field(@employee, :hire_date) %>
+    <%= text_field(@employee, :home_phone) %>
+    <%= text_field(@employee, :extension) %>
+    <%= text_field(@employee, :photo) %>
   </fieldset>
 <% end %>

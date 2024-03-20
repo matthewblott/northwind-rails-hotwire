@@ -1,14 +1,14 @@
 class RegionsController < ApplicationController
   include Pagy::Backend
-  before_action :set_region, only: %i[ show edit update destroy ]
-  
+  before_action :set_region, only: %i[show edit update destroy]
+
   def index
     count = 10
     @pagy, @regions = pagy(Region.all, items: count)
   end
 
   def show
-    @region = Region.find(params[:id]) 
+    @region = Region.find(region_id)
   end
 
   def edit
@@ -20,39 +20,36 @@ class RegionsController < ApplicationController
 
   def create
     @region = Region.new(region_params)
-
     if @region.save
-      redirect_to @region, notice: "region was successfully created."
+      redirect_to(show_region_path(@region), notice: "Region was successfully created.")
     else
-      render inertia: 'regions/new', props: { 
-        region: @region,
-        errors: @region.errors
-      }
+      render(:new, status: :unprocessable_entity)
     end
   end
 
   def update
     if @region.update(region_params)
-      redirect_to @region, notice: "region was successfully updated."
+      redirect_to(show_region_path(@region), notice: "Region was successfully updated.", status: :see_other)
     else
-      render inertia: 'regions/edit', props: { 
-        region: @region,
-        errors: @region.errors
-      }
+      render(:edit, status: :unprocessable_entity)
     end
   end
 
   def destroy
     @region.destroy!
-    redirect_to people_url, notice: "region was successfully destroyed.", status: :see_other
+    redirect_to(index_region_path, notice: "Region was successfully destroyed.", status: :see_other)
   end
 
   private
-    def set_region
-      @region = Region.find(params[:id])
-    end
+  def set_region
+    @region = Region.find(region_id)
+  end
 
-    def region_params
-      params.require(:region).permit(:name)
-    end
+  def region_id
+    params[:region_id]
+  end
+
+  def region_params
+    params.permit(:name)
+  end
 end

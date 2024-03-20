@@ -1,10 +1,9 @@
-<p style="color: green"><%= notice %></p>
+<h1>Region</h1>
+<%= turbo_stream_from @region %>
 
-<%= render @region %>
+<controls>
+  <%= link_to "Edit", edit_region_path(@region), role: "button" %>
+  <%= link_to "Back", index_region_path, role: "button" %>
+</controls>
 
-<div>
-  <%= link_to "Edit this region", edit_region_path(@region) %> |
-  <%= link_to "Back to regions", regions_path %>
-
-  <%= button_to "Destroy this region", @region, method: :delete %>
-</div>
+<%= render "form", disabled: true %>

@@ -1,14 +1,24 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Regions</h1>
 
-<div id="regions">
-  <% @regions.each do |region| %>
-    <%= render region %>
-    <p>
-      <%= link_to "Show this region", region %>
-    </p>
-  <% end %>
-</div>
+<%= render partial: "pager", locals: { pagy: @pagy, path: index_region_path, new_path: new_region_path } %>
 
-<%= link_to "New region", new_region_path %>
+<table>
+  <thead>
+    <tr>
+      <th>Region Id</th>
+      <th>Region Name</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @regions.each do |region| %>
+      <tr>
+        <td title="Region Id">
+          <%= link_to region.id, show_region_path(region) %>
+        </td>
+        <td title="Region Name">
+          <%= region.name %> 
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -3,12 +3,12 @@
 
 <%= form_with(url: false, :html => {:id => 'customer_form'}) do %>
   <fieldset <%= 'disabled' if disabled %>>
-    <%= field(@customer, :id) %>
-    <%= field(@customer, :company_name) %>
-    <%= field(@customer, :contact_name) %>
-    <%= field(@customer, :contact_title) %>
-    <%= field(@customer, :phone) %>
-    <%= field(@customer, :fax) %>    
+    <%= text_field(@customer, :id) %>
+    <%= text_field(@customer, :company_name) %>
+    <%= text_field(@customer, :contact_name) %>
+    <%= text_field(@customer, :contact_title) %>
+    <%= text_field(@customer, :phone) %>
+    <%= text_field(@customer, :fax) %>    
   </fieldset>
 <% end %>
 
