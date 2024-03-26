@@ -1,10 +1,8 @@
-<h1>Editing order</h1>
-
-<%= render "form", order: @order %>
-
-<br>
-
-<div>
-  <%= link_to "Show this order", @order %> |
-  <%= link_to "Back to orders", orders_path %>
-</div>
+<h1>Editing Order</h1>
+<%= turbo_stream_from @order %>
+<controls>
+  <%= button_tag "Update", form: "order_form", formaction: update_order_path(@order), method: :patch %>
+  <%= link_to "Back", show_order_path(@order), role: "button" %>
+</controls>
+<input type="hidden" name="_method" value="patch" form="order_form">
+<%= render "form", disabled: false %>

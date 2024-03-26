@@ -7,6 +7,31 @@ class RegionsController < ApplicationController
     @pagy, @regions = pagy(Region.all, items: count)
   end
 
+  def search
+    q = params[:q]
+
+    regions = if q.present?
+      Region.name_like(q)
+    else
+      []
+    end
+
+    items = {}
+    regions.map { |region| items[region.id] = region.name }
+
+    respond_to do |format|
+      format.turbo_stream do
+        render(
+          turbo_stream: turbo_stream.update(
+            "region_search_results",
+            partial: "search_results",
+            locals: {items: items, q: q}
+          )
+        )
+      end
+    end
+  end
+
   def show
     @region = Region.find(region_id)
   end

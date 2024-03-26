@@ -1,14 +1,14 @@
 class ShippersController < ApplicationController
   include Pagy::Backend
-  before_action :set_shipper, only: %i[ show edit update destroy ]
-  
+  before_action :set_shipper, only: %i[show edit update destroy]
+
   def index
     count = 10
     @pagy, @shippers = pagy(Shipper.all, items: count)
   end
 
   def show
-    @shipper = Shipper.find(params[:id]) 
+    @shipper = Shipper.find(shipper_id)
   end
 
   def edit
@@ -20,39 +20,41 @@ class ShippersController < ApplicationController
 
   def create
     @shipper = Shipper.new(shipper_params)
-
     if @shipper.save
-      redirect_to @shipper, notice: "shipper was successfully created."
+      redirect_to(show_shipper_path(@shipper), notice: "Shipper was successfully created.")
     else
-      render inertia: 'shippers/new', props: { 
-        shipper: @shipper,
-        errors: @shipper.errors
-      }
+      render(:new, status: :unprocessable_entity)
     end
   end
 
   def update
     if @shipper.update(shipper_params)
-      redirect_to @shipper, notice: "shipper was successfully updated."
+      redirect_to(show_shipper_path(@shipper), notice: "Shipper was successfully updated.", status: :see_other)
     else
-      render inertia: 'shippers/edit', props: { 
-        shipper: @shipper,
-        errors: @shipper.errors
-      }
+      render(:edit, status: :unprocessable_entity)
     end
   end
 
   def destroy
     @shipper.destroy!
-    redirect_to people_url, notice: "shipper was successfully destroyed.", status: :see_other
+    redirect_to(index_shipper_path, notice: "Shipper was successfully destroyed.", status: :see_other)
   end
 
   private
-    def set_shipper
-      @shipper = Shipper.find(params[:id])
-    end
+  def set_shipper
+    @shipper = Shipper.find(shipper_id)
+  end
 
-    def shipper_params
-      params.require(:shipper).permit(:company_name, :phone)
-    end
+  def shipper_id
+    params[:shipper_id]
+  end
+
+  def shipper_params
+    params.permit(
+      :id,
+      :company_name,
+      :phone
+    )
+  end
+
 end

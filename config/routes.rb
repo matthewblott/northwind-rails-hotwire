@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   devise_for(:employees, controllers: {sessions: "sessions"})
   resources(:login, only: [:index])
 
-  # # =========================================================================
-  # # Categories
-  # # =========================================================================
+  # =========================================================================
+  # Categories
+  # =========================================================================
   #
   # resources(:categories, only: [:index, :show, :new, :create, :edit, :update])
   # post("/categories/new", to: "categories#create")
@@ -97,20 +97,31 @@ Rails.application.routes.draw do
     as: "destroy_employee_address"
   )
 
-  # # =========================================================================
-  # # Orders
-  # # =========================================================================
-  #
-  # resources(:orders, only: [:index, :show, :new, :create, :edit, :update])
-  # get("orders/search", to: "orders#search")
-  # post("/orders/new", to: "orders#create")
-  # patch("/orders/:id/edit", to: "orders#update")
-  # put("/orders/:id/edit", to: "orders#update")
-  #
-  # # =========================================================================
-  # # Order Items
-  # # =========================================================================
-  #
+  # =========================================================================
+  # Orders
+  # =========================================================================
+
+  get("/orders", to: "orders#index", as: "index_order")
+  get("/orders/new", to: "orders#new", as: "new_order")
+  get("/orders/:order_id", to: "orders#show", as: "show_order")
+  get(
+    "/orders/:order_id/edit",
+    to: "orders#edit",
+    as: "edit_order"
+  )
+
+  post("/orders", to: "orders#create", as: "create_order")
+  patch("/orders/:order_id", to: "orders#update", as: "update_order")
+  delete(
+    "/orders/:order_id",
+    to: "orders#destroy",
+    as: "destroy_order"
+  )
+
+  # =========================================================================
+  # Order Items
+  # =========================================================================
+
   # resources(:order_items, only: [:index, :show, :new, :create, :edit, :update])
   # get("/orders/:order_id/items/new", to: "order_items#new")
   # get("/orders/:order_id/items", to: "order_items#index")
@@ -121,15 +132,26 @@ Rails.application.routes.draw do
   # put("/orders/:order_id/items/:product_id/edit", to: "order_items#update")
   # delete("/orders/:order_id/items/:product_id/edit", to: "order_items#destroy")
 
-  # # =========================================================================
-  # # Products
-  # # =========================================================================
-  #
-  # resources(:products, only: [:index, :show, :new, :create, :edit, :update])
-  # post("products/search", to: "products#search")
-  # post("/products/new", to: "products#create")
-  # patch("/products/:id/edit", to: "products#update")
-  # put("/products/:id/edit", to: "products#update")
+  # =========================================================================
+  # Products
+  # =========================================================================
+
+  get("/products", to: "products#index", as: "index_product")
+  get("/products/new", to: "products#new", as: "new_product")
+  get("/products/:product_id", to: "products#show", as: "show_product")
+  get(
+    "/products/:product_id/edit",
+    to: "products#edit",
+    as: "edit_product"
+  )
+
+  post("/products", to: "products#create", as: "create_product")
+  patch("/products/:product_id", to: "products#update", as: "update_product")
+  delete(
+    "/products/:product_id",
+    to: "products#destroy",
+    as: "destroy_product"
+  )
 
   # =========================================================================
   # Regions
@@ -144,6 +166,8 @@ Rails.application.routes.draw do
     as: "edit_region"
   )
 
+  post("/regions/search", to: "regions#search", as: "search_region")
+
   post("/regions", to: "regions#create", as: "create_region")
   patch("/regions/:region_id", to: "regions#update", as: "update_region")
   delete(
@@ -152,14 +176,26 @@ Rails.application.routes.draw do
     as: "destroy_region"
   )
 
-  # # =========================================================================
-  # # Shippers
-  # # =========================================================================
-  #
-  # resources(:shippers, only: [:index, :show, :new, :create, :edit, :update])
-  # post("/shippers/new", to: "shippers#create")
-  # patch("/shippers/:id/edit", to: "shippers#update")
-  # put("/shippers/:id/edit", to: "shippers#update")
+  # =========================================================================
+  # Shippers
+  # =========================================================================
+
+  get("/shippers", to: "shippers#index", as: "index_shipper")
+  get("/shippers/new", to: "shippers#new", as: "new_shipper")
+  get("/shippers/:shipper_id", to: "shippers#show", as: "show_shipper")
+  get(
+    "/shippers/:shipper_id/edit",
+    to: "shippers#edit",
+    as: "edit_shipper"
+  )
+
+  post("/shippers", to: "shippers#create", as: "create_shipper")
+  patch("/shippers/:shipper_id", to: "shippers#update", as: "update_shipper")
+  delete(
+    "/shippers/:shipper_id",
+    to: "shippers#destroy",
+    as: "destroy_shipper"
+  )
 
   # =========================================================================
   # Suppliers
@@ -182,9 +218,9 @@ Rails.application.routes.draw do
     as: "destroy_supplier"
   )
 
-  # # =========================================================================
-  # # Supplier Addresses
-  # # =========================================================================
+  # =========================================================================
+  # Supplier Addresses
+  # =========================================================================
 
   get("/suppliers/:supplier_id/addresses", to: "supplier_addresses#index", as: "index_supplier_address")
   get("/suppliers/:supplier_id/addresses/new", to: "supplier_addresses#new", as: "new_supplier_address")

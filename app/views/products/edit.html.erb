@@ -1,10 +1,8 @@
-<h1>Editing product</h1>
-
-<%= render "form", product: @product %>
-
-<br>
-
-<div>
-  <%= link_to "Show this product", @product %> |
-  <%= link_to "Back to products", products_path %>
-</div>
+<h1>Editing Product</h1>
+<%= turbo_stream_from @product %>
+<controls>
+  <%= button_tag "Update", form: "product_form", formaction: update_product_path(@product), method: :patch %>
+  <%= link_to "Back", show_product_path(@product), role: "button" %>
+</controls>
+<input type="hidden" name="_method" value="patch" form="product_form">
+<%= render "form", disabled: false %>

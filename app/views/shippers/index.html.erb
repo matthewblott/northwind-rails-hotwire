@@ -1,14 +1,22 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Shippers</h1>
-
-<div id="shippers">
-  <% @shippers.each do |shipper| %>
-    <%= render shipper %>
-    <p>
-      <%= link_to "Show this shipper", shipper %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New shipper", new_shipper_path %>
+<%= render partial: "pager", locals: { pagy: @pagy, path: index_shipper_path, new_path: new_shipper_path } %>
+<table>
+  <thead>
+    <tr>
+      <th>Shipper Id</th>
+      <th>Company Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @shippers.each do |shipper| %>
+      <tr>
+        <td title="Shipper Id">
+          <%= link_to shipper.id, show_shipper_path(shipper) %>
+        </td>
+        <td title="Company Name">
+          <%= shipper.company_name %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

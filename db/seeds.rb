@@ -56,13 +56,10 @@ end
 # Suppliers
 # =============================================================================
 
-# supplier_id = a
-
 suppliers = []
 
 100.times do
   Supplier.create(
-    # suppliers << :id => supplier_id,
     :company_name => Faker::Company.name,
     :contact_name => Faker::Name.name,
     :contact_title => Faker::Job.title,
@@ -71,7 +68,6 @@ suppliers = []
     :fax => Faker::PhoneNumber.phone_number,
     :homepage => Faker::Internet.url
   )
-  # supplier_id += 1
 end
 
 # =============================================================================

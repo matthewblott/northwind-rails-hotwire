@@ -2,18 +2,18 @@
 </div>
 
 
-<%= form_with(model: supplier, url: false, :html => {:id => 'supplier_form'}) do |f| %>
+<%= form_with(model: supplier, url: false, :html => {:id => 'supplier_form'}) do %>
 
   <fieldset <%= 'disabled' if disabled %>>
 
-    <%= field(supplier, :id) %>
-    <%= field(supplier, :company_name) %>
-    <%= field(supplier, :contact_name) %>
-    <%= field(supplier, :contact_title) %>
-    <%= field(supplier, :region) %>
-    <%= field(supplier, :phone) %>
-    <%= field(supplier, :fax) %>    
-    <%= field(supplier, :homepage) %>
+    <%= text_field(supplier, :id) %>
+    <%= text_field(supplier, :company_name) %>
+    <%= text_field(supplier, :contact_name) %>
+    <%= text_field(supplier, :contact_title) %>
+    <%= text_field(supplier, :region) %>
+    <%= text_field(supplier, :phone) %>
+    <%= text_field(supplier, :fax) %>    
+    <%= text_field(supplier, :homepage) %>
 
   </fieldset>
 

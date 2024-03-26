@@ -1,10 +1,8 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @order %>
-
-<div>
-  <%= link_to "Edit this order", edit_order_path(@order) %> |
-  <%= link_to "Back to orders", orders_path %>
-
-  <%= button_to "Destroy this order", @order, method: :delete %>
-</div>
+<h1>Order</h1>
+<%= turbo_stream_from @order %>
+<controls>
+  <%= link_to "Edit", edit_order_path(@order), role: "button" %>
+  <%#= link_to "Addresses", index_order_address_path(@order), role: "button" %>
+  <%= link_to "Back", index_order_path, role: "button" %>
+</controls>
+<%= render "form", disabled: true %>

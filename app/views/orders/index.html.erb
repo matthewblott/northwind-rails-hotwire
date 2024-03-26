@@ -1,14 +1,26 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Orders</h1>
-
-<div id="orders">
-  <% @orders.each do |order| %>
-    <%= render order %>
-    <p>
-      <%= link_to "Show this order", order %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New order", new_order_path %>
+<%= render partial: "pager", locals: { pagy: @pagy, path: index_order_path, new_path: new_order_path } %>
+<table>
+  <thead>
+    <tr>
+      <th>Order Id</th>
+      <th>Company Name</th>
+      <th>Employee Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td title="Order Id">
+          <%= link_to order.id, show_order_path(order) %>
+        </td>
+        <td title="Company Name">
+          <%= order.customer.company_name %>
+        </td>
+        <td title="Employee Name">
+          <%= order.employee.first_name + " " + order.employee.last_name %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

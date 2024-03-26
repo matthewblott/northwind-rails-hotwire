@@ -1,30 +1,31 @@
 <div style="height: 10px">
 </div>
-
-<form action="<%= search_employee_path %>" id="search-form" method="post"></form>
-
+<form action="<%= search_employee_path %>" id="employee-search-form" method="post"></form>
+<form action="<%= search_region_path %>" id="region-search-form" method="post"></form>
 <%= form_with(url: false, :html => {:id => 'employee_form'}) do %>
   <fieldset <%= 'disabled' if disabled %>>
     <%= email_field(@employee, :email) %>
     <%= text_field(@employee, :title_of_courtesy) %>
     <%= text_field(@employee, :first_name) %>
     <%= text_field(@employee, :last_name) %>
-
-    <field data-controller="search-field" id="message">
-      <%= label(@employee, :reports_to) %> 
-      <input type="hidden" id="reports_to" name="reports_to" value="<%= @employee.reports_to %>"  data-search-field-target="code">
-      <input type="search" name="q" value="<%= "#{@employee&.manager&.first_name} #{@employee&.manager&.last_name}" %>" data-search-field-target="query" form="search-form" data-action="input->search-field#search">
-      <button form="search-form" type="submit" data-search-field-target="submit" style="display: none;"></button>
-      <span data-search-field-target="display" style="display: none;"></span>
-    </field>
-
-    <div id="search_results" data-controller="search-results" data-search-results-search-field-outlet="#message"
-      data-search-results-target="container"></div>
-        
+    <!-- Reports To -->
+    <%= render partial: "search_field", locals: { 
+      field_name: :reports_to,
+      field_value: @employee.reports_to,
+      field_text: @employee.manager.full_name,
+      form_id: "employee-search-form", 
+      search_results_id: 'employee_search_results' } %>
     <%= date_field(@employee, :birth_date) %>
+    <!-- Region -->
+    <%= render partial: "search_field", locals: { 
+      field_name: :region_id,
+      field_value: @employee.region_id,
+      field_text: @employee.region.name,
+      form_id: "region-search-form", 
+      search_results_id: 'region_search_results' } %>
     <%= date_field(@employee, :hire_date) %>
     <%= text_field(@employee, :home_phone) %>
-    <%= text_field(@employee, :extension) %>
+    <%= number_field(@employee, :extension) %>
     <%= text_field(@employee, :photo) %>
   </fieldset>
 <% end %>

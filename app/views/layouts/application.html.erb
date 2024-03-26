@@ -90,7 +90,6 @@
   </head>
   <body>
     <top>
-
       <header>
         <input id="menu" type="checkbox" />
         <span style="padding-right: 5px">
@@ -100,9 +99,10 @@
           <ul>
             <li><a href="/customers">Customers</a></li>
             <li><a href="/employees">Employees</a></li>
-            <%# <li><a href="/products">Products</a></li> %>
-            <%# <li><a href="/regions">Regions</a></li> %>
-            <%# <li><a href="/shippers">Shippers</a></li> %>
+            <li><a href="/orders">Orders</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/regions">Regions</a></li>
+            <li><a href="/shippers">Shippers</a></li>
             <li><a href="/suppliers">Suppliers</a></li>
           </ul>
           <ul>
@@ -117,7 +117,6 @@
         <label for="menu" />
       </header>
     </top>
-
     <p class="notice"><%#= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>

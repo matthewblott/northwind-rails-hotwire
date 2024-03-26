@@ -16,16 +16,24 @@ class EmployeesController < ApplicationController
   end
 
   def search
-    query = params[:q]
-    records = Employee.name_like(query)
+    q = params[:q]
+
+    employees = if q.present?
+      Employee.name_like(q)
+    else
+      []
+    end
+
+    items = {}
+    employees.map { |employee| items[employee.id] = employee.full_name }
 
     respond_to do |format|
       format.turbo_stream do
         render(
           turbo_stream: turbo_stream.update(
-            "search_results",
-            partial: "employees/search_results",
-            locals: {employees: records}
+            "employee_search_results",
+            partial: "search_results",
+            locals: {items: items, q: q}
           )
         )
       end
@@ -86,6 +94,8 @@ class EmployeesController < ApplicationController
       :last_name,
       :first_name,
       :reports_to,
+      # :employee_id,
+      :region_id,
       :title,
       :title_of_courtesy,
       :birth_date,
