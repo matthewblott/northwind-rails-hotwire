@@ -1,0 +1,83 @@
+/*
+  ============
+  CSS Top Menu
+  ============
+*/
+
+top header {
+  display: grid;
+  grid-template-columns: max-content auto;
+}
+
+top input {
+  display: none;
+}
+
+top span {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+top input:checked ~ span {
+  display: none;
+}
+
+top nav {
+  display: grid;
+  grid-column: 2;
+  grid-row: 1;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+}
+
+top input:checked ~ nav {
+  grid-column: 1;
+}
+
+top input:checked ~ nav ul:last-of-type {
+  grid-column: 1;
+}
+
+top li {
+  display: inline;
+}
+
+top input:checked ~ nav li {
+  display: block;
+}
+
+top label {
+  display: none;
+}
+
+top label {
+  justify-self: end;
+  font-size: 2rem;
+  line-height: 0.5em;
+  grid-column: 2;
+  grid-row: 1;
+  text-align: right;
+}
+
+top label:after {
+  content: "\2261";
+}
+
+top input:checked ~ label {
+  grid-column: 2;
+}
+
+@media (max-width: 600px) {
+  top label {
+    display: block;
+  }
+
+  top span {
+    display: block;
+  }
+
+  top input:not(:checked) ~ nav {
+    display: none;
+  }
+}
+

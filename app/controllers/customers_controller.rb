@@ -7,6 +7,31 @@ class CustomersController < ApplicationController
     @pagy, @customers = pagy(Customer.all, items: count)
   end
 
+  def search
+    q = params[:q]
+
+    customers = if q.present?
+      Customer.name_like(q)
+    else
+      []
+    end
+
+    items = {}
+    customers.map { |customer| items[customer.id] = customer.company_name }
+
+    respond_to do |format|
+      format.turbo_stream do
+        render(
+          turbo_stream: turbo_stream.update(
+            "customer_search_results",
+            partial: "search_results",
+            locals: {items: items, q: q}
+          )
+        )
+      end
+    end
+  end
+
   def show
     @customer = Customer.find(customer_id)
   end
@@ -55,7 +80,7 @@ class CustomersController < ApplicationController
       :company_name,
       :contact_name,
       :contact_title,
-      :region,
+      :customer,
       :phone,
       :fax
     )

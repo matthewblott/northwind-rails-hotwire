@@ -1,0 +1,30 @@
+<h1>Employee Orders Checklist</h1>
+<controls>
+  <%= link_to "Back", index_employee_order_path(params[:employee_id]), role: "button" %>
+</controls>
+<table>
+  <thead>
+    <tr>
+      <th>Pending</th>
+      <th>Shipped</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+      <%= turbo_stream_from order %>
+      <tr id="orders" data-controller="sortable" data-sortable-resource-name-value="order" data-sortable-param-name-value="status">
+        <td title="Pending" data-sortable-update-url="<%= show_order_path(order) %>">
+          <% if order.shipped_date == nil %>
+            <%= order.id %>
+          <% end %>
+        </td>
+        <td title="Shipped">
+          <% if order.shipped_date != nil %>
+            <%= order.id %>
+            <%#= order.shipped_date&.strftime("%Y-%m-%d") %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

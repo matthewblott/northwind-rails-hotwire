@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
+  get("employee_orders/index")
   devise_for(:employees, controllers: {sessions: "sessions"})
   resources(:login, only: [:index])
+
+  # =========================================================================
+  # Addresses
+  # =========================================================================
+
+  post("/addresses/search", to: "addresses#search", as: "search_address")
 
   # =========================================================================
   # Categories
@@ -23,6 +30,8 @@ Rails.application.routes.draw do
     to: "customers#edit",
     as: "edit_customer"
   )
+
+  post("/customers/search", to: "customers#search", as: "search_customer")
 
   post("/customers", to: "customers#create", as: "create_customer")
   patch("/customers/:customer_id", to: "customers#update", as: "update_customer")
@@ -96,6 +105,16 @@ Rails.application.routes.draw do
     to: "employee_addresses#destroy",
     as: "destroy_employee_address"
   )
+
+  # =========================================================================
+  # Employee Orders
+  # =========================================================================
+
+  get("/employees/:employee_id/orders", to: "employee_orders#index", as: "index_employee_order")
+  get("/employees/:employee_id/orders/paid", to: "employee_orders#paid", as: "paid_employee_order")
+  get("/employees/:employee_id/orders/checklist", to: "employee_orders#checklist", as: "checklist_employee_order")
+
+  patch("/employees/:employee_id/orders/:order_id/move", to: "employee_orders#move", as: "move_employee_order")
 
   # =========================================================================
   # Orders

@@ -16,6 +16,7 @@ gem "faker", "~> 3.2"
 gem "pagy", "~> 6.1"
 gem "scenic", "~> 1.7"
 gem "scenic_sqlite_adapter", "~> 0.1.0"
+gem "requestjs-rails", "~> 0.0.11"
 
 group :development, :test do
   gem "debug"

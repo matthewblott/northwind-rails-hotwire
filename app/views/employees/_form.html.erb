@@ -12,7 +12,7 @@
     <%= render partial: "search_field", locals: { 
       field_name: :reports_to,
       field_value: @employee.reports_to,
-      field_text: @employee.manager.full_name,
+      field_text: @employee.manager&.full_name,
       form_id: "employee-search-form", 
       search_results_id: 'employee_search_results' } %>
     <%= date_field(@employee, :birth_date) %>
