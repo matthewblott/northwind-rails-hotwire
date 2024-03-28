@@ -1,65 +1,43 @@
 class OrderItemsController < ApplicationController
   include Pagy::Backend
-  before_action :set_order_item, only: %i[ show edit update destroy ]
-  
+  before_action :set_order_item, only: %i[show edit update destroy]
+
   def index
     count = 10
-    order_id = params[:order_id]
-    @pagy, @order_items = pagy(OrderItem.by_order(order_id), items: count)
-    @order_id = order_id
-  end
-
-  def show
-    @product = @order_item.product 
-  end
-
-  def edit
-    @product = @order_item.product 
+    @pagy, @order_items = pagy(OrderItem.includes(:product).by_order(order_id), items: count)
   end
 
   def new
     @order_item = OrderItem.new
-    @order_item.order_id = params[:order_id]
+    @order_item.order_id = order_id
   end
 
   def create
     @order_item = OrderItem.new(order_item_params)
 
     if @order_item.save
-      redirect_to better_order_items_show_path(order_id:@order_item.order_id, product_id:@order_item.product_id) 
+      redirect_to(show_order_item_path(:product_id => @order_item.product_id), notice: "Item was successfully created.")
     else
-      render inertia: 'order_items/new', props: { 
-        order_item: @order_item,
-        errors: @order_item.errors
-      }
+      render(:new, status: :unprocessable_entity)
     end
   end
 
   def update
     if @order_item.update(order_item_params)
-      redirect_to better_order_items_show_path(order_id:@order_item.order_id, product_id:@order_item.product_id) 
+      redirect_to(show_order_item_path(@order_item), notice: "Item was successfully updated.", status: :see_other)
     else
-      render inertia: "/orders/#{@order_item.order_id}/items/#{@order_item.product_id}/edit", props: { 
-        order_item: @order_item,
-        errors: @order_item.errors
-      }
+      render(:edit, status: :unprocessable_entity)
     end
   end
 
   def destroy
-    order_id = @order_item.order_id
     @order_item.destroy!
-    redirect_to :action => :index, order_id: order_id
+    redirect_to(index_order_item_path, notice: "Item was successfully destroyed.", status: :see_other)
   end
 
   private
-    def set_order_item
-      order_id = params[:order_id]
-      product_id = params[:product_id]
-      @order_item = OrderItem.includes(:product).find([order_id,product_id])
-    end
-
-    def order_item_params
-      params.require(:order_item).permit(:order_id, :product_id, :quantity, :unit_price, :discount, :order_item_status)
-    end
+  def order_id = params[:order_id]
+  def product_id = params[:product_id]
+  def order_item_params = params.permit(:order_id, :product_id, :quantity, :unit_price, :discount)
+  def set_order_item = @order_item = OrderItem.find([order_id, product_id])
 end

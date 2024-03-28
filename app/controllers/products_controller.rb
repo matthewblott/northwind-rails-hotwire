@@ -8,22 +8,30 @@ class ProductsController < ApplicationController
   end
 
   def search
-    query = params[:search]
-    records = Product.name_like(query)
-    @records = records.map { |m| Hash[m.id => m.id.to_s + " " + m.product_code + " " + m.product_name] }
-    render(json: @records)
+    q = params[:q]
+    products = if q.present?
+      Product.name_like(q)
+    else
+      []
+    end
+
+    items = {}
+    products.map { |product| items[product.id] = product.product_code }
+
+    respond_to do |format|
+      format.turbo_stream do
+        render(
+          turbo_stream: turbo_stream.update(
+            "product_search_results",
+            partial: "search_results",
+            locals: {items: items, q: q}
+          )
+        )
+      end
+    end
   end
 
-  def show
-    @product = Product.find(product_id)
-  end
-
-  def edit
-  end
-
-  def new
-    @product = Product.new
-  end
+  def new = @product = Product.new
 
   def create
     @product = Product.new(product_params)
@@ -48,13 +56,8 @@ class ProductsController < ApplicationController
   end
 
   private
-  def set_product
-    @product = Product.find(product_id)
-  end
-
-  def product_id
-    params[:product_id]
-  end
+  def product_id = params[:product_id]
+  def set_product = @product = Product.find(product_id)
 
   def product_params
     params.permit(

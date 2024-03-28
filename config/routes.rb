@@ -25,21 +25,13 @@ Rails.application.routes.draw do
   get("/customers", to: "customers#index", as: "index_customer")
   get("/customers/new", to: "customers#new", as: "new_customer")
   get("/customers/:customer_id", to: "customers#show", as: "show_customer")
-  get(
-    "/customers/:customer_id/edit",
-    to: "customers#edit",
-    as: "edit_customer"
-  )
+  get("/customers/:customer_id/edit", to: "customers#edit", as: "edit_customer")
 
   post("/customers/search", to: "customers#search", as: "search_customer")
 
   post("/customers", to: "customers#create", as: "create_customer")
   patch("/customers/:customer_id", to: "customers#update", as: "update_customer")
-  delete(
-    "/customers/:customer_id",
-    to: "customers#destroy",
-    as: "destroy_customer"
-  )
+  delete("/customers/:customer_id", to: "customers#destroy", as: "destroy_customer")
 
   # =========================================================================
   # Customer Addresses
@@ -48,11 +40,7 @@ Rails.application.routes.draw do
   get("/customers/:customer_id/addresses", to: "customer_addresses#index", as: "index_customer_address")
   get("/customers/:customer_id/addresses/new", to: "customer_addresses#new", as: "new_customer_address")
   get("/customers/:customer_id/addresses/:address_id", to: "customer_addresses#show", as: "show_customer_address")
-  get(
-    "/customers/:customer_id/addresses/:address_id/edit",
-    to: "customer_addresses#edit",
-    as: "edit_customer_address"
-  )
+  get("/customers/:customer_id/addresses/:address_id/edit", to: "customer_addresses#edit", as: "edit_customer_address")
 
   post("/customers/:customer_id/addresses", to: "customer_addresses#create", as: "create_customer_address")
   patch("/customers/:customer_id/addresses/:address_id", to: "customer_addresses#update", as: "update_customer_address")
@@ -69,11 +57,7 @@ Rails.application.routes.draw do
   get("/employees", to: "employees#index", as: "index_employee")
   get("/employees/new", to: "employees#new", as: "new_employee")
   get("/employees/:employee_id", to: "employees#show", as: "show_employee")
-  get(
-    "/employees/:employee_id/edit",
-    to: "employees#edit",
-    as: "edit_employee"
-  )
+  get("/employees/:employee_id/edit", to: "employees#edit", as: "edit_employee")
 
   post("/employees/search", to: "employees#search", as: "search_employee")
 
@@ -123,33 +107,24 @@ Rails.application.routes.draw do
   get("/orders", to: "orders#index", as: "index_order")
   get("/orders/new", to: "orders#new", as: "new_order")
   get("/orders/:order_id", to: "orders#show", as: "show_order")
-  get(
-    "/orders/:order_id/edit",
-    to: "orders#edit",
-    as: "edit_order"
-  )
+  get("/orders/:order_id/edit", to: "orders#edit", as: "edit_order")
 
   post("/orders", to: "orders#create", as: "create_order")
   patch("/orders/:order_id", to: "orders#update", as: "update_order")
-  delete(
-    "/orders/:order_id",
-    to: "orders#destroy",
-    as: "destroy_order"
-  )
+  delete("/orders/:order_id", to: "orders#destroy", as: "destroy_order")
 
   # =========================================================================
   # Order Items
   # =========================================================================
 
-  # resources(:order_items, only: [:index, :show, :new, :create, :edit, :update])
-  # get("/orders/:order_id/items/new", to: "order_items#new")
-  # get("/orders/:order_id/items", to: "order_items#index")
-  # get("/orders/:order_id/items/:product_id", to: "order_items#show", as: "order_items_show")
-  # get("/orders/:order_id/items/:product_id/edit", to: "order_items#edit")
-  #
-  # post("/orders/:order_id/items/new", to: "order_items#create")
-  # put("/orders/:order_id/items/:product_id/edit", to: "order_items#update")
-  # delete("/orders/:order_id/items/:product_id/edit", to: "order_items#destroy")
+  get("/orders/:order_id/items", to: "order_items#index", as: "index_order_item")
+  get("/orders/:order_id/items/new", to: "order_items#new", as: "new_order_item")
+  get("/orders/:order_id/items/:product_id", to: "order_items#show", as: "show_order_item")
+  get("/orders/:order_id/items/:product_id/edit", to: "order_items#edit", as: "edit_order_item")
+
+  post("/orders/:order_id/items/new", to: "order_items#create", as: "create_order_item")
+  patch("/orders/:order_id/items/:product_id", to: "order_items#update", as: "update_order_item")
+  delete("/orders/:order_id/items/:product_id", to: "order_items#destroy", as: "destroy_order_item")
 
   # =========================================================================
   # Products
@@ -163,6 +138,8 @@ Rails.application.routes.draw do
     to: "products#edit",
     as: "edit_product"
   )
+
+  post("/products/search", to: "products#search", as: "search_product")
 
   post("/products", to: "products#create", as: "create_product")
   patch("/products/:product_id", to: "products#update", as: "update_product")

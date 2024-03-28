@@ -8,7 +8,6 @@ class ShippersController < ApplicationController
   end
 
   def show
-    @shipper = Shipper.find(shipper_id)
   end
 
   def edit
@@ -41,20 +40,7 @@ class ShippersController < ApplicationController
   end
 
   private
-  def set_shipper
-    @shipper = Shipper.find(shipper_id)
-  end
-
-  def shipper_id
-    params[:shipper_id]
-  end
-
-  def shipper_params
-    params.permit(
-      :id,
-      :company_name,
-      :phone
-    )
-  end
-
+  def shipper_id = params[:shipper_id]
+  def set_shipper = @shipper = Shipper.find(shipper_id)
+  def shipper_params = params.permit(:id, :company_name, :phone)
 end

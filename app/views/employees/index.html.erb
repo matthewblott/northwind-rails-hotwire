@@ -1,28 +1,26 @@
 <h1>Employees</h1>
-
 <%= render partial: "pager", locals: { pagy: @pagy, path: index_employee_path, new_path: new_employee_path } %>
-
 <table>
   <thead>
     <tr>
-      <th>Employee Id</th>
       <th>Name</th>
       <th>Line Manager</th>
+      <th>Region</th>
     </tr>
   </thead>
   <tbody>
-  <% @employees.each do |employee| %>
+    <% @employees.each do |employee| %>
       <tr>
-        <td title="Employee Id">
-          <%= link_to employee.id, show_employee_path(employee) %>
-        </td>
         <td title="Name">
-          <%= employee.first_name %> <%= employee.last_name %> 
+          <%= link_to employee.full_name, show_employee_path(employee) %>
         </td>
         <td title="Line Manager">
-          <%= employee.manager_first_name %> <%= employee.manager_last_name %> 
+          <%= employee.manager_first_name %> <%= employee.manager_last_name %>
+        </td>
+        <td title="Region">
+          <%= employee.region_name %>
         </td>
       </tr>
-  <% end %>
+    <% end %>
   </tbody>
 </table>

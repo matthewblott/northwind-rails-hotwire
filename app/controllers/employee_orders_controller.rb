@@ -29,7 +29,5 @@ class EmployeeOrdersController < ApplicationController
   end
 
   private
-  def employee_id
-    params[:employee_id]
-  end
+  def employee_id = params[:employee_id]
 end

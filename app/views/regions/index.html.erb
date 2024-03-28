@@ -1,24 +1,18 @@
 <h1>Regions</h1>
-
 <%= render partial: "pager", locals: { pagy: @pagy, path: index_region_path, new_path: new_region_path } %>
-
 <table>
   <thead>
     <tr>
-      <th>Region Id</th>
       <th>Region Name</th>
     </tr>
   </thead>
   <tbody>
-  <% @regions.each do |region| %>
+    <% @regions.each do |region| %>
       <tr>
-        <td title="Region Id">
-          <%= link_to region.id, show_region_path(region) %>
-        </td>
         <td title="Region Name">
-          <%= region.name %> 
+          <%= link_to region.name, show_region_path(region) %>
         </td>
       </tr>
-  <% end %>
+    <% end %>
   </tbody>
 </table>

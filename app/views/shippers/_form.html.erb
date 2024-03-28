@@ -2,7 +2,6 @@
 </div>
 <%= form_with(url: false, :html => {:id => 'shipper_form'}) do %>
   <fieldset <%= 'disabled' if disabled %>>
-    <%= text_field(@shipper, :id) %>
     <%= text_field(@shipper, :company_name) %>
     <%= text_field(@shipper, :phone) %>
   </fieldset>

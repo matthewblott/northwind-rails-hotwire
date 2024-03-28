@@ -1,28 +1,22 @@
 <h1>Suppliers</h1>
-
 <%= render partial: "pager", locals: { pagy: @pagy, path: index_supplier_path, new_path: new_supplier_path } %>
-
 <table>
   <thead>
     <tr>
-      <th>Supplier Id</th>
       <th>Company Name</th>
       <th>Region</th>
     </tr>
   </thead>
   <tbody>
-  <% @suppliers.each do |supplier| %>
+    <% @suppliers.each do |supplier| %>
       <tr>
-        <td title="Supplier Id">
-          <%= link_to supplier.id, show_supplier_path(supplier) %>
-        </td>
         <td title="Company Name">
-          <%= supplier.company_name %> 
+          <%= link_to supplier.company_name, show_supplier_path(supplier) %>
         </td>
         <td title="Region">
-          <%= supplier.region %> 
+          <%= supplier.region %>
         </td>
       </tr>
-  <% end %>
+    <% end %>
   </tbody>
 </table>

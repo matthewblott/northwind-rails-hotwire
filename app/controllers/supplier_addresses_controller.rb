@@ -1,19 +1,10 @@
 class SupplierAddressesController < ApplicationController
   before_action :set_address, only: %i[show edit]
 
-  def index
-    @supplier = Supplier.find(supplier_id)
-  end
-
-  def show
-  end
-
-  def new
-    @address = Address.new
-  end
-
-  def edit
-  end
+  def index = @supplier = Supplier.find(supplier_id)
+  def show = return
+  def edit = return
+  def new = (@address = Address.new)
 
   def create
     supplier = Supplier.find(supplier_id)
@@ -52,15 +43,8 @@ class SupplierAddressesController < ApplicationController
   end
 
   private
-
-  def supplier_id
-    params[:supplier_id]
-  end
-
-  def address_id
-    params[:address_id]
-  end
-
+  def supplier_id = params[:supplier_id]
+  def address_id = params[:address_id]
   def address_params
     params.permit(
       :name,
@@ -77,5 +61,4 @@ class SupplierAddressesController < ApplicationController
     supplier = Supplier.find(supplier_id)
     @address = supplier.addresses.find(address_id)
   end
-
 end

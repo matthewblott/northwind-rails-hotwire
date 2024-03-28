@@ -3,18 +3,14 @@
 <table>
   <thead>
     <tr>
-      <th>Shipper Id</th>
       <th>Company Name</th>
     </tr>
   </thead>
   <tbody>
     <% @shippers.each do |shipper| %>
       <tr>
-        <td title="Shipper Id">
-          <%= link_to shipper.id, show_shipper_path(shipper) %>
-        </td>
         <td title="Company Name">
-          <%= shipper.company_name %>
+          <%= link_to shipper.company_name, show_shipper_path(shipper) %>
         </td>
       </tr>
     <% end %>

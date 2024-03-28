@@ -33,7 +33,6 @@ class CustomersController < ApplicationController
   end
 
   def show
-    @customer = Customer.find(customer_id)
   end
 
   def edit
@@ -66,14 +65,8 @@ class CustomersController < ApplicationController
   end
 
   private
-  def set_customer
-    @customer = Customer.find(customer_id)
-  end
-
-  def customer_id
-    params[:customer_id]
-  end
-
+  def set_customer = @customer = Customer.find(customer_id)
+  def customer_id = params[:customer_id]
   def customer_params
     params.permit(
       :id,

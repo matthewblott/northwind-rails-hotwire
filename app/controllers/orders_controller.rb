@@ -12,7 +12,6 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(order_id)
   end
 
   def edit

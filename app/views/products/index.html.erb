@@ -3,7 +3,6 @@
 <table>
   <thead>
     <tr>
-      <th>Product Id</th>
       <th>Product Code</th>
       <th>Product Name</th>
     </tr>
@@ -11,11 +10,8 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td title="Product Id">
-          <%= link_to product.id, show_product_path(product) %>
-        </td>
         <td title="Product Code">
-          <%= product.product_code %>
+          <%= link_to product.product_code, show_product_path(product) %>
         </td>
         <td title="Product Name">
           <%= product.product_name %>

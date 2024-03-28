@@ -15,4 +15,5 @@ class Product < ApplicationRecord
     products.uniq
   end
 
+  has_many :order_items
 end

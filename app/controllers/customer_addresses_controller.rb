@@ -1,19 +1,8 @@
 class CustomerAddressesController < ApplicationController
   before_action :set_address, only: %i[show edit update]
 
-  def index
-    @customer = Customer.find(customer_id)
-  end
-
-  def show
-  end
-
-  def new
-    @address = Address.new
-  end
-
-  def edit
-  end
+  def index = @customer = Customer.find(customer_id)
+  def new = @address = Address.new
 
   def create
     customer = Customer.find(customer_id)
@@ -54,14 +43,8 @@ class CustomerAddressesController < ApplicationController
   end
 
   private
-
-  def customer_id
-    params[:customer_id]
-  end
-
-  def address_id
-    params[:address_id]
-  end
+  def customer_id = params[:customer_id]
+  def address_id = params[:address_id]
 
   def address_params
     params.permit(

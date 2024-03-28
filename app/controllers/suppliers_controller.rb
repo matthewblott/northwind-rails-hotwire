@@ -7,16 +7,7 @@ class SuppliersController < ApplicationController
     @pagy, @suppliers = pagy(Supplier.all, items: count)
   end
 
-  def show
-    @supplier = Supplier.find(supplier_id)
-  end
-
-  def edit
-  end
-
-  def new
-    @supplier = Supplier.new
-  end
+  def new = @supplier = Supplier.new
 
   def create
     @supplier = Supplier.new(supplier_params)
@@ -42,14 +33,8 @@ class SuppliersController < ApplicationController
   end
 
   private
-  def set_supplier
-    @supplier = Supplier.find(supplier_id)
-  end
-
-  def supplier_id
-    params[:supplier_id]
-  end
-
+  def supplier_id = params[:supplier_id]
+  def set_supplier = @supplier = Supplier.find(supplier_id)
   def supplier_params
     params.permit(
       :company_name,

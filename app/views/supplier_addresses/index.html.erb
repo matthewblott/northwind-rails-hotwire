@@ -1,10 +1,8 @@
 <h1>Supplier Addresses</h1>
-
 <controls>
   <%= link_to "New", new_supplier_address_path(@supplier.id), role: "button" %>
   <%= link_to "Back", index_supplier_path(@supplier.id), role: "button" %>
 </controls>
-
 <table>
   <thead>
     <tr>
@@ -16,24 +14,24 @@
     </tr>
   </thead>
   <tbody>
-  <% @supplier.addresses.each do |address| %>
-    <tr>
-      <td title="Supplier Id">
-        <%= link_to @supplier.id, show_supplier_address_path(@supplier.id, address.id) %>
-      </td>
-      <td title="Address Id">
-        <%= address.id %>
-      </td>
-      <td title="Address Line 1">
-        <%= address.address_line_1 %>
-      </td>
-      <td title="Postal Town">
-        <%= address.postal_town %>
-      </td>
-      <td title="Post Code">
-        <%= address.post_code %>
-      </td>
-    </tr>
-  <% end %>
+    <% @supplier.addresses.each do |address| %>
+      <tr>
+        <td title="Supplier Id">
+          <%= link_to @supplier.id, show_supplier_address_path(@supplier.id, address.id) %>
+        </td>
+        <td title="Address Id">
+          <%= address.id %>
+        </td>
+        <td title="Address Line 1">
+          <%= address.address_line_1 %>
+        </td>
+        <td title="Postal Town">
+          <%= address.postal_town %>
+        </td>
+        <td title="Post Code">
+          <%= address.post_code %>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>

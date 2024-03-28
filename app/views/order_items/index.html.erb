@@ -1,14 +1,43 @@
 <p style="color: green"><%= notice %></p>
+<h1>Order Items</h1>
+<style>
+  nav ul {
+    display: flex;
+  }
 
-<h1>Order items</h1>
-
-<div id="order_items">
-  <% @order_items.each do |order_item| %>
-    <%= render order_item %>
-    <p>
-      <%= link_to "Show this order item", order_item %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New order item", new_order_item_path %>
+  nav ul li {
+    padding-right: 5px;
+  }
+</style>
+<nav>
+  <ul>
+    <li>
+      <%= link_to "New", new_order_item_path, role: "button" %>
+      <%= link_to "Back", show_order_path(params[:order_id]), role: "button" %>
+    </li>
+  </ul>
+</nav>
+<table>
+  <thead>
+    <tr>
+      <th>Product Code</th>
+      <th>Quantity</th>
+      <th>Discount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order_items.each do |order_item| %>
+      <tr>
+        <td title="Product Code">
+          <%= link_to order_item.product.product_code, show_order_item_path(params[:order_id], order_item.product_id) %>
+        </td>
+        <td title="Quantity">
+          <%= order_item.quantity %>
+        </td>
+        <td title="Discount">
+          <%= order_item.discount %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

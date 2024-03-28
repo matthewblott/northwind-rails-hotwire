@@ -54,6 +54,8 @@ class EmployeeAddressesController < ApplicationController
   end
 
   private
+  def employee_id = params[:employee_id]
+  def address_id = params[:address_id]
 
   def address_params
     params.permit(
@@ -65,14 +67,6 @@ class EmployeeAddressesController < ApplicationController
       :country,
       :post_code
     )
-  end
-
-  def employee_id
-    params[:employee_id]
-  end
-
-  def address_id
-    params[:address_id]
   end
 
   def set_address

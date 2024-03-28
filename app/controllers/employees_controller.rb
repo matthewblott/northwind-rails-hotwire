@@ -10,6 +10,8 @@ class EmployeesController < ApplicationController
         .select(:id, :first_name, :last_name, :reports_to, :hire_date)
         .select("managers_employees.first_name as manager_first_name")
         .select("managers_employees.last_name as manager_last_name")
+        .left_outer_joins(:region)
+        .select("regions.name as region_name")
         .all,
       items: count
     )
@@ -41,11 +43,9 @@ class EmployeesController < ApplicationController
   end
 
   def show
-    @manager = @employee.manager
   end
 
   def edit
-    @manager = @employee.manager
   end
 
   def new
@@ -79,13 +79,11 @@ class EmployeesController < ApplicationController
   end
 
   private
-
-  def employee_id
-    params[:employee_id] || params[:id]
-  end
+  def employee_id = params[:employee_id] || params[:id]
 
   def set_employee
     @employee = Employee.includes(:manager).find(employee_id)
+    @manager = @employee.manager
   end
 
   def employee_params
@@ -94,7 +92,6 @@ class EmployeesController < ApplicationController
       :last_name,
       :first_name,
       :reports_to,
-      # :employee_id,
       :region_id,
       :title,
       :title_of_courtesy,

@@ -1,39 +1,33 @@
 <h1>Employee Addresses</h1>
-
 <controls>
   <%= link_to "New", new_employee_address_path(@employee.id), role: "button" %>
   <%= link_to "Back", show_employee_path(@employee.id), role: "button" %>
 </controls>
-
 <table>
   <thead>
     <tr>
-      <th>Employee Id</th>
-      <th>Address Id</th>
+      <th>Address Name</th>
       <th>Address Line 1</th>
       <th>Postal Town</th>
       <th>Post Code</th>
     </tr>
   </thead>
   <tbody>
-  <% @employee.addresses.each do |address| %>
-    <tr>
-      <td title="Employee Id">
-        <%= link_to @employee.id, show_employee_address_path(@employee.id, address.id) %>
-      </td>
-      <td title="Address Id">
-        <%= address.id %>
-      </td>
-      <td title="Address Line 1">
-        <%= address.address_line_1 %>
-      </td>
-      <td title="Postal Town">
-        <%= address.postal_town %>
-      </td>
-      <td title="Post Code">
-        <%= address.post_code %>
-      </td>
-    </tr>
-  <% end %>
+    <% @employee.addresses.each do |address| %>
+      <tr>
+        <td title="Address Name">
+          <%= link_to address.name, show_employee_address_path(@employee.id, address.id) %>
+        </td>
+        <td title="Address Line 1">
+          <%= address.address_line_1 %>
+        </td>
+        <td title="Postal Town">
+          <%= address.postal_town %>
+        </td>
+        <td title="Post Code">
+          <%= address.post_code %>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
