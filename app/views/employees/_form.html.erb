@@ -20,7 +20,7 @@
     <%= render partial: "search_field", locals: { 
       field_name: :region_id,
       field_value: @employee.region_id,
-      field_text: @employee.region.name,
+      field_text: @employee&.region&.name,
       form_id: "region-search-form", 
       search_results_id: 'region_search_results' } %>
     <%= date_field(@employee, :hire_date) %>

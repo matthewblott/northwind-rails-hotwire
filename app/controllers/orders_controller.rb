@@ -11,12 +11,6 @@ class OrdersController < ApplicationController
     )
   end
 
-  def show
-  end
-
-  def edit
-  end
-
   def new
     @order = Order.new
     @order.order_date = Date.today
@@ -47,18 +41,8 @@ class OrdersController < ApplicationController
 
   private
 
-  def set_order
-    # @order = Order.includes(:address).includes(:order).includes(:employee).find(params[:id])
-    # @address = @order.address
-    # @order = @order.order
-    # @employee = @order.employee
-
-    @order = Order.find(order_id)
-  end
-
-  def order_id
-    params[:order_id]
-  end
+  def set_order = @order = Order.find(order_id)
+  def order_id = params[:order_id]
 
   def order_params
     params.permit(

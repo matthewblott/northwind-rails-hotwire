@@ -33,9 +33,9 @@
 </style>
 <br>
 <br>
-<% @orders.each do |order| %>
-  <%= turbo_stream_from order %>
-  <checklist>
+<checklist>
+  <% @orders.each do |order| %>
+    <%= turbo_stream_from order %>
     <ul id="orders" data-controller="sortable" data-sortable-resource-name-value="order" data-sortable-param-name-value="status">
       <li data-sortable-update-url="<%= move_employee_order_path(order.employee_id, order.id) %>">
         <% if order.shipped_date == nil %>
@@ -48,5 +48,5 @@
         <% end %>
       </li>
     </ul>
-  </checklist>
-<% end %>
+  <% end %>
+</checklist>
