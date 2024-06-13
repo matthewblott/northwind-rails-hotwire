@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def checkbox_field(model, field_name)
     render("checkbox_field", model: model, field_name: field_name)
   end

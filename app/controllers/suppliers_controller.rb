@@ -4,7 +4,12 @@ class SuppliersController < ApplicationController
 
   def index
     count = 10
-    @pagy, @suppliers = pagy(Supplier.all, items: count)
+    counted = true 
+    if counted
+      @pagy, @suppliers = pagy(Supplier.all, items: count)
+    else
+      @pagy, @suppliers = pagy_countless(Supplier.all, items: count)
+    end
   end
 
   def new = @supplier = Supplier.new
@@ -21,7 +26,7 @@ class SuppliersController < ApplicationController
 
   def update
     if @supplier.update(supplier_params)
-      redirect_to(@supplier, notice: "Supplier was successfully updated.", status: :see_other)
+      redirect_to(show_supplier_path(@supplier), notice: "Supplier was successfully updated.", status: :see_other)
     else
       render(:edit, status: :unprocessable_entity)
     end

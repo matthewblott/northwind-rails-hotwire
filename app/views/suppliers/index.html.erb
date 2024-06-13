@@ -1,5 +1,6 @@
 <h1>Suppliers</h1>
 <%= render partial: "pager", locals: { pagy: @pagy, path: index_supplier_path, new_path: new_supplier_path } %>
+
 <table>
   <thead>
     <tr>
@@ -7,11 +8,10 @@
       <th>Region</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="foo" is="turbo-frame">
     <% @suppliers.each do |supplier| %>
       <tr>
-        <td title="Company Name">
-          <%= link_to supplier.company_name, show_supplier_path(supplier) %>
+        <td title="Company Name"> <%= link_to supplier.company_name, show_supplier_path(supplier) %>
         </td>
         <td title="Region">
           <%= supplier.region %>
@@ -20,3 +20,8 @@
     <% end %>
   </tbody>
 </table>
+
+<%= turbo_frame_tag :foo2, 
+  loading: :lazy,
+  src: index_supplier_path(format: :turbo_stream, page: @pagy.next)
+%>

@@ -1,14 +1,31 @@
-<h1>Editing supplier</h1>
+<% content_for :title, "Edit Supplier" %>
 
 <%= turbo_stream_from @supplier %>
 
-<controls>
-  <%= button_tag "Update", form: "supplier_form", formaction: update_supplier_path(params[:supplier_id]), method: :patch %>
-  <%= button_tag "Delete", form: "delete_supplier_form" %>
-  <%= link_to "Back", index_supplier_path(params[:customer_id]), role: "button" %>
+<controls class="turbo-native-hidden">
+  <%= button_tag "foo", form: "supplier_form",
+    formaction: update_supplier_path(params[:supplier_id]),
+    data: { controller: 'bridge--form', bridge__form_target: "submit", bridge_title2: "Foo", bridge_color: "green" },
+    method: :patch %>
+
+  <%= button_tag "bar", form: "supplier_form",
+    formaction: update_supplier_path(params[:supplier_id]),
+    data: { controller: 'bridge--foo', bridge__foo_target: "submit2", bridge_title2: "Foo" },
+    method: :patch %>
+
+
+    <%= button_tag "Delete", form: "delete_supplier_form" %>
+    <%= link_to "Back", index_supplier_path(params[:customer_id]), role: "button" %>
+
 </controls>
 
-<%= form_with method: :delete, url: destroy_supplier_path(params[:supplier_id], params[:supplier_id]), :html => {:id => 'delete_supplier_form'} do |form| %>
+<!--
+data-action="turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd"
+-->
+
+<%= form_with method: :delete,
+  url: destroy_supplier_path(params[:supplier_id], params[:supplier_id]),
+  :html => {:id => 'delete_supplier_form'} do |form| %>
   <input type="hidden" name="supplier_id" value=<%= params[:supplier_id] %>>
   <input type="hidden" name="customer_id" value=<%= params[params[:supplier_id]] %>>
 <% end %>
