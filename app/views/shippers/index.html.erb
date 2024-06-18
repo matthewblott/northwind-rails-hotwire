@@ -1,4 +1,5 @@
-<h1>Shippers</h1>
+<% content_for :title, "Shippers" %>
+
 <%= render partial: "pager", locals: { pagy: @pagy, path: index_shipper_path, new_path: new_shipper_path } %>
 <table>
   <thead>

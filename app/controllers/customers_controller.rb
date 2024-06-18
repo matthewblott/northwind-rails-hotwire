@@ -1,7 +1,7 @@
 class CustomersController < ApplicationController
   include Pagy::Backend
   before_action :set_customer, only: %i[show edit update destroy]
-
+  
   def index
     count = 10
     @pagy, @customers = pagy(Customer.all, items: count)

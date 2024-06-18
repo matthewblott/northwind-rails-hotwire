@@ -14,9 +14,10 @@
     <%= render "shared/header", title: page_title %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <main>
+    <main class="<%= 'header-spacer' if !turbo_native_app? %>">
       <h1 class="turbo-native-hidden"><%= page_title %></h1>
       <%= yield %>
     </main>
+    <%= render "shared/footer" %>
   </body>
 </html>

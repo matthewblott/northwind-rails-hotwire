@@ -1,9 +1,7 @@
 import { BridgeComponent } from "@hotwired/strada"
-import { BridgeElement } from "@hotwired/strada"
-
 
 export default class extends BridgeComponent {
-  static component = "form"
+  static component = "save"
   static targets = [ "submit" ]
 
   connect() {
@@ -12,11 +10,9 @@ export default class extends BridgeComponent {
   }
 
   notifyBridgeOfConnect() {
+    const title = 'Save'
 
-    const submitButton = new BridgeElement(this.submitTarget)
-    const submitTitle = submitButton.title
-
-    this.send("connect", { submitTitle }, () => {
+    this.send("connect", { title }, () => {
       this.submitTarget.click()
     })
 

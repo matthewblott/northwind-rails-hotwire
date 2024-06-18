@@ -1,4 +1,5 @@
-<h1>Employee Orders</h1>
+<% content_for :title, "Employee Orders" %>
+
 <controls>
   <%= link_to "Checklist", checklist_employee_order_path(params[:employee_id]), role: "button" %>
   <%= link_to "Paid", paid_employee_order_path(params[:employee_id]), role: "button" %>
