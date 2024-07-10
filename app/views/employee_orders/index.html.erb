@@ -1,10 +1,19 @@
 <% content_for :title, "Employee Orders" %>
 
-<controls>
-  <%= link_to "Checklist", checklist_employee_order_path(params[:employee_id]), role: "button" %>
-  <%= link_to "Paid", paid_employee_order_path(params[:employee_id]), role: "button" %>
+<controls class="turbo-native-hidden">
+
+  <%= link_to "Checklist", checklist_employee_order_path(params[:employee_id]),
+    data: { controller: 'bridge--link-to', bridge__link_to_target: "submit", bridge_title: 'Checklist' },
+    role: "button" %>
+
+  <%#= link_to "Paid", paid_employee_order_path(params[:employee_id]),
+    data: { controller: 'bridge--link-to', bridge__link_to_target: "submit", bridge_title: 'Paid' },
+    role: "button" %>
+
   <%= link_to "Back", show_employee_path(params[:employee_id]), role: "button" %>
+
 </controls>
+
 <table>
   <thead>
     <tr>

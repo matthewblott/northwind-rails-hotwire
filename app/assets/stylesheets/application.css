@@ -30,23 +30,7 @@
 @import url('_typography.css');
 @import url('_menu.css');
 @import url('_form.css');
-
-/* bridge--form component */
-/* [data-bridge-components~="form"] */
-/* [type="submit"] */
-/* [data-controller="bridge--form"] { */
-/*   display: none; */
-/* } */
-
-/* bridge--button component */
-/* [data-bridge-components~="button"] */
-/* [data-controller~="bridge--button"] { */
-/*   display: none; */
-/* } */
-
-body.turbo-native .turbo-native-hidden {
-  display: none;
-}
+@import url('_turbo-native.css');
 
 .header-spacer {
   padding-top: 20px !important;

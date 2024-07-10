@@ -2,7 +2,8 @@
 </div>
 <form action="<%= search_employee_path %>" id="employee-search-form" method="post"></form>
 <form action="<%= search_region_path %>" id="region-search-form" method="post"></form>
-<%= form_with(url: false, :html => {:id => 'employee_form'}) do %>
+
+<%= form_with(model: employee, url: false, :html => {:id => 'employee_form'}) do %>
   <fieldset <%= 'disabled' if disabled %>>
     <%= email_field(@employee, :email) %>
     <%= text_field(@employee, :title_of_courtesy) %>

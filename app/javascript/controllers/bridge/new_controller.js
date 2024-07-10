@@ -2,7 +2,7 @@ import { BridgeComponent } from "@hotwired/strada"
 
 export default class extends BridgeComponent {
   // This must be the same name as the argument passed to the BridgeComponentFactory constructor 
-  static component = "save"
+  static component = "new"
   static targets = [ "submit" ]
 
   connect() {
@@ -11,7 +11,7 @@ export default class extends BridgeComponent {
   }
 
   notifyBridgeOfConnect() {
-    const title = 'Save'
+    const title = 'New'
 
     this.send("connect", { title }, () => {
       this.submitTarget.click()

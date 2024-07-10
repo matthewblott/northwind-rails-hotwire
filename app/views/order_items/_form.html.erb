@@ -1,7 +1,9 @@
 <div style="height: 10px">
 </div>
+
 <form action="<%= search_product_path %>" id="product-search-form" method="post"></form>
-<%= form_with(url: false, :html => {:id => 'order_item_form'}) do %>
+
+<%= form_with(model: order_item, url: false, :html => {:id => 'order_item_form'}) do %>
   <fieldset <%= 'disabled' if disabled %>>
     <!-- Product -->
     <%= render partial: "search_field", locals: { 

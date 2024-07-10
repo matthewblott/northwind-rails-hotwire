@@ -1,7 +1,10 @@
-<h1>New supplier</h1>
+<% content_for :title, "New Supplier" %>
 
-<controls>
-  <button form="supplier_form">Create</button>
+<controls class="turbo-native-hidden">
+  <%= button_tag "Create", form: "supplier_form",
+    formaction: create_supplier_path,
+    data: { controller: 'bridge--save', bridge__save_target: "submit" },
+    method: :post %>
   <%= link_to "Back", index_supplier_path, role: "button" %>
 </controls>
 

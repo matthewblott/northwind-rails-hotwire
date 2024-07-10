@@ -61,7 +61,7 @@ Rails.application.routes.draw do
 
   post("/employees/search", to: "employees#search", as: "search_employee")
 
-  post("/employees/:employee_id", to: "employees#create", as: "create_employee")
+  post("/employees", to: "employees#create", as: "create_employee")
   patch("/employees/:employee_id", to: "employees#update", as: "update_employee")
   delete(
     "/employees/:employee_id",
@@ -206,7 +206,7 @@ Rails.application.routes.draw do
     as: "edit_supplier"
   )
 
-  post("/suppliers/:supplier_id", to: "suppliers#create", as: "create_supplier")
+  post("/suppliers", to: "suppliers#create", as: "create_supplier")
   patch("/suppliers/:supplier_id", to: "suppliers#update", as: "update_supplier")
   delete(
     "/suppliers/:supplier_id",

@@ -1,9 +1,12 @@
 <% content_for :title, "Employee Addresses" %>
 
-<controls>
-  <%= link_to "New", new_employee_address_path(@employee.id), role: "button" %>
+<controls class="turbo-native-hidden">
+  <%= link_to "New", new_employee_address_path(@employee.id),
+    data: { controller: 'bridge--new', bridge__new_target: "submit" },
+    role: "button" %>
   <%= link_to "Back", show_employee_path(@employee.id), role: "button" %>
 </controls>
+
 <table>
   <thead>
     <tr>

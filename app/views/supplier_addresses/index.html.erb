@@ -1,9 +1,12 @@
 <% content_for :title, "Supplier Addresses" %>
 
-<controls>
-  <%= link_to "New", new_supplier_address_path(@supplier.id), role: "button" %>
-  <%= link_to "Back", index_supplier_path(@supplier.id), role: "button" %>
+<controls class="turbo-native-hidden">
+  <%= link_to "New", new_supplier_address_path(@supplier.id),
+    data: { controller: 'bridge--new', bridge__new_target: "submit" },
+    role: "button" %>
+  <%= link_to "Back", show_supplier_path(params[:supplier_id]), role: "button" %>
 </controls>
+
 <table>
   <thead>
     <tr>

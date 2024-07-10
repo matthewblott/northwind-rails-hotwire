@@ -1,8 +1,8 @@
 import { BridgeComponent } from "@hotwired/strada"
 
 export default class extends BridgeComponent {
-  static component = "edit"
-  static targets = [ "button" ]
+  static component = "delete"
+  static targets = [ "submit" ]
 
   connect() {
     super.connect()
@@ -10,10 +10,12 @@ export default class extends BridgeComponent {
   }
 
   notifyBridgeOfConnect() {
-    const data = {}
-    this.send("connect", data , () => {
-      this.buttonTarget.click()
+    const title = 'Delete'
+
+    this.send("connect", { title }, () => {
+      this.submitTarget.click()
     })
+
   }
 
 }

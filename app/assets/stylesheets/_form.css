@@ -8,7 +8,13 @@ fieldset {
   grid-gap: var(--pico-spacing);
 }
 
-field {
-  margin-right: calc(var(--pico-spacing) * 2);
-}
+/* field { */
+/*   margin-right: calc(var(--pico-spacing) * 1); */
+/* } */
 
+/* Disable for mobile screens because it makes left and right margins unmatched */
+/* @media (min-width: 1024px) { */
+/*   field { */
+/*     margin-right: calc(var(--pico-spacing) * 2); */
+/*   } */
+/* } */

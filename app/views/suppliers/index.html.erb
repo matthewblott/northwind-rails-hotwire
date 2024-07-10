@@ -1,8 +1,6 @@
 <% content_for :title, "Suppliers" %>
 
-<% if !turbo_native_app? %>
-  <%= render partial: "pager", locals: { pagy: @pagy, path: index_supplier_path, new_path: new_supplier_path } %>
-<% end %>
+<%= render partial: "pager", locals: { pagy: @pagy, path: index_supplier_path, new_path: new_supplier_path } %>
 
 <table>
   <thead>

@@ -1,4 +1,4 @@
-<h1>Edit Employee Address</h1>
+<% content_for :title, "Edit Employee Address" %>
 
 <controls>
   <%= button_tag "Update", form: "address_form", formaction: update_employee_address_path(params[:employee_id], params[:address_id]), method: :patch %>

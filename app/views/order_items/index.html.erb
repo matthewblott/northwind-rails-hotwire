@@ -1,23 +1,15 @@
 <% content_for :title, "Order Items" %>
-<p style="color: green"><%= notice %></p>
 
-<style>
-  nav ul {
-    display: flex;
-  }
+<controls class="turbo-native-hidden">
 
-  nav ul li {
-    padding-right: 5px;
-  }
-</style>
-<nav>
-  <ul>
-    <li>
-      <%= link_to "New", new_order_item_path, role: "button" %>
-      <%= link_to "Back", show_order_path(params[:order_id]), role: "button" %>
-    </li>
-  </ul>
-</nav>
+  <%= link_to "New", new_order_item_path,
+    data: { controller: 'bridge--new', bridge__new_target: "submit" },
+    role: "button" %>
+
+  <%= link_to "Back", show_order_path(params[:order_id]), role: "button" %>
+
+</controls>
+
 <table>
   <thead>
     <tr>

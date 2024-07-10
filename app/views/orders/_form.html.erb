@@ -3,7 +3,9 @@
 <form action="<%= search_customer_path %>" id="customer-search-form" method="post"></form>
 <form action="<%= search_employee_path %>" id="employee-search-form" method="post"></form>
 <form action="<%= search_address_path %>" id="address-search-form" method="post"></form>
-<%= form_with(url: false, :html => {:id => 'order_form'}) do %>
+
+
+<%= form_with(model: order, url: false, :html => {:id => 'order_form'}) do %>
   <fieldset <%= 'disabled' if disabled %>>
     <%= text_field(@order, :id) %>
     <!-- Customer -->

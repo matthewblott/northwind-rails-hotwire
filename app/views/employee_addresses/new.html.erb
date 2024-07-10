@@ -1,4 +1,4 @@
-<h1>New Employee Address</h1>
+<% content_for :title, "New Employee Address" %>
 
 <controls>
   <%= button_tag "Create", form: "address_form", formaction: create_employee_address_path(params[:employee_id]) %>

@@ -1,7 +1,7 @@
 <div style="height: 10px">
 </div>
 
-<%= form_with(url: false, :html => {:id => 'customer_form'}) do %>
+<%= form_with(model: customer, url: false, :html => {:id => 'customer_form'}) do %>
   <fieldset <%= 'disabled' if disabled %>>
     <%= text_field(@customer, :id) %>
     <%= text_field(@customer, :company_name) %>

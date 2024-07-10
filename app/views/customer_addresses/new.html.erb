@@ -1,8 +1,11 @@
-<h1>New Customer Address</h1>
+<% content_for :title, "New Customer Address" %>
 
-<controls>
-  <%= button_tag "Create", form: "address_form", formaction: create_customer_address_path(params[:customer_id]) %>
+<controls class="turbo-native-hidden">
+  <%= button_tag "Create", form: "address_form",
+    formaction: create_customer_address_path(params[:customer_id]),
+    data: { controller: 'bridge--save', bridge__save_target: "submit" },
+    method: :patch %>
   <%= link_to "Back", index_customer_address_path(params[:customer_id]), role: "button" %>
 </controls>
 
-<%= render "address_form", address: @address %>
+<%= render "address_form", address: @address, disabled: false %>
