@@ -14,8 +14,10 @@ export default class extends BridgeComponent {
   notifyBridgeOfConnect() {
     const submitButton = new BridgeElement(this.submitTarget)
     const title = submitButton.title
-
-    this.send("connect", { title }, () => {
+    
+    this.send("connect", { title }, (e) => {
+      const data = e.data
+      console.log(data)
       this.submitTarget.click()
     })
 

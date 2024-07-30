@@ -3,17 +3,12 @@
 <%= turbo_stream_from @address %>
 
 <controls class="turbo-native-hidden">
-
-  <%#= link_to "Edit", edit_employee_address_path(params[:employee_id], params[:address_id]), role: "button" %>
   <%= link_to "Edit", edit_employee_address_path(params[:employee_id], params[:address_id]),
     data: { controller: 'bridge--edit', bridge__edit_target: "submit" },
     role: "button" %>
-
   <%= link_to "Back", index_employee_address_path(params[:employee_id]), role: "button" %>
-
 </controls>
 
-<%#= render "address_form", address: @address %>
 <%= render "address_form", address: @address, disabled: true %>
 
 

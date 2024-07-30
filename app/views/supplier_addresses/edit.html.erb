@@ -1,11 +1,13 @@
 <% content_for :title, "Edit Supplier Address" %>
 
-<controls>
-
+<controls class="turbo-native-hidden">
   <%= button_tag "Update", form: "address_form",
     formaction: update_supplier_address_path(params[:supplier_id], params[:address_id]),
     data: { controller: 'bridge--save', bridge__save_target: "submit" },
     method: :patch %>
+
+  <%= button_tag "Delete", form: "delete_address_form",
+    data: { controller: 'bridge--delete', bridge__delete_target: "submit" } %>
 
   <%= link_to "Back", index_supplier_address_path(params[:supplier_id]), role: "button" %>
 </controls>

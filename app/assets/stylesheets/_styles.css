@@ -8,9 +8,13 @@
   --pico-font-family: var(--pico-font-family-sans-serif);
   --pico-line-height: 1.5;
   --pico-font-weight: 400;
-  --pico-font-size: 100%;
+  /* Set to 120% for Turbo */
+  --pico-font-size: 120%; 
   --pico-text-underline-offset: 0.1rem;
+
   --pico-border-radius: 0; /* Changed from 0.25rem */
+  /* Set to 1rem for Turbo */
+  /* --pico-border-radius: 1rem; */
   --pico-border-width: 0.0625rem;
   --pico-outline-width: 0.125rem;
   --pico-transition: 0.2s ease-in-out;

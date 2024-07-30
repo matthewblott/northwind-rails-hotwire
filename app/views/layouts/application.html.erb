@@ -8,12 +8,26 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= turbo_refreshes_with method: :morph, scroll: :preserve %>
+    
+
+    <% if turbo_native_app? %>
+      <style>
+        :root {
+          --pico-border-radius: 1rem;
+        }
+      </style>
+    <% end %>
+
     <%= yield :head %>
   </head>
   <body class="<%= "turbo-native" if turbo_native_app? %>">
-    <%= render "shared/header", title: page_title %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+
+    <% unless turbo_native_app? %>
+      <%= render "shared/header", title: page_title %>
+    <% end %>
+
+    <p class="notice turbo-native-hidden"><%= notice %></p>
+    <p class="alert turbo-native-hidden"><%= alert %></p>
     <main class="<%= 'header-spacer' if !turbo_native_app? %>">
       <h1 class="turbo-native-hidden"><%= page_title %></h1>
       <%= yield %>

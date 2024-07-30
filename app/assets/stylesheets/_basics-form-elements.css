@@ -86,7 +86,8 @@ fieldset {
 width: 100%;
 margin: 0;
 margin-bottom: var(--pico-spacing);
-padding: 0;
+/* Disable for Turbo */
+/* padding: 0;  */
 border: 0;
 }
 

@@ -8,6 +8,8 @@
     data: { controller: 'bridge--save', bridge__save_target: "submit" },
     method: :patch %>
   <%= link_to "Back", show_customer_path(@customer), role: "button" %>
+
 </controls>
+
 
 <%= render "form", customer: @customer, disabled: false %>

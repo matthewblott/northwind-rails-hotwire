@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   devise_for(:employees, controllers: {sessions: "sessions"})
   resources(:login, only: [:index])
 
+
+  get("/turbo-logout", to: "turbo#logout")
+
   # =========================================================================
   # Addresses
   # =========================================================================

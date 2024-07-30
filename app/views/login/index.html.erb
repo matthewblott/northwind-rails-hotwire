@@ -1,22 +1,22 @@
-<% content_for :title, "Login" %>
+<% content_for :title, "Sign in" %>
 
-<form action="/employees/sign_in" method="post">
-  <div>
-    <label
-      >email <input name="employee[email]" value="admin@example.com" /></label
-    >
-  </div>
-  <div>
-    <label
-      >password <input
-        name="employee[password]"
-        type="password"
-        value="password"
-      /></label
-    >
-  </div>
-  <div>
-    <button>login</button>
-  </div>
-</form>
+<controls class="turbo-native-hidden">
+  <%= button_tag "Submit", form: "login_form",
+    data: { controller: 'bridge--custom', bridge__custom_target: "submit" }
+   %>
+</controls>
 
+<%= form_with model: @employee, url: employee_session_path, :html => {:id => 'login_form'}, method: :post do |form| %>
+  <fieldset>
+
+    <field>
+      <label for="employee_email">Email</label>
+      <input name="employee[email]" id="employee_email">
+    </field>
+    <field>
+      <label for="employee_password">Password</label>
+      <input name="employee[password]" type="password" id="employee_password">
+    </field>
+
+  </fieldset>
+<% end %>
