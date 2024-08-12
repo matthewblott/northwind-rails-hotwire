@@ -1,1 +1,35 @@
 <% content_for :title, "Northwind" %>
+<% if turbo_native_ios? %>
+
+  <fieldset>
+    <field>
+      <%= link_to "Customers", index_customer_path, role: "button", style: "width: 100%; margin-top: 15px; margin-bottom: 5px;" %>
+    </field>
+    <field>
+      <%= link_to "Employees", index_employee_path, role: "button", style: "width: 100%; margin-top: 15px; margin-bottom: 5px;" %>
+    </field>    
+    <field>
+      <%= link_to "Orders", index_order_path, role: "button", style: "width: 100%; margin-top: 15px; margin-bottom: 5px;" %>
+    </field>
+    <field>
+      <%= link_to "Products", index_product_path, role: "button", style: "width: 100%; margin-top: 15px; margin-bottom: 5px;" %>
+    </field>
+    <field>
+      <%= link_to "Regions", index_region_path, role: "button", style: "width: 100%; margin-top: 15px; margin-bottom: 5px;" %>
+    </field>
+    <field>
+      <%= link_to "Shippers", index_shipper_path, role: "button", style: "width: 100%; margin-top: 15px; margin-bottom: 5px;" %>
+    </field>
+    <field>
+      <%= link_to "Suppliers", index_supplier_path, role: "button", style: "width: 100%; margin-top: 15px; margin-bottom: 5px;" %>
+    </field>
+    <field>
+      <% if employee_signed_in? %>
+        <%= link_to 'Sign out', destroy_employee_session_path, data: { turbo_method: :delete }, role: "button", style: "width: 100%; margin-top: 15px; margin-bottom: 5px;" %>
+      <% else %>
+        <%= link_to 'Sign in', new_employee_session_path, role: "button", style: "width: 100%; margin-top: 15px; margin-bottom: 5px;" %>
+      <% end %>
+    </field>
+  </fieldset>
+
+ <% end %>

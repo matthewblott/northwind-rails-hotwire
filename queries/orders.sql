@@ -20,8 +20,11 @@ select
 	a.postal_town,
 	a.post_code
 from
-  orders o join
-  customers c on o.customer_id = c.id join
-  employees e on o.employee_id = e.id join
+  orders o
+join
+  customers c on o.customer_id = c.id
+join
+  employees e on o.employee_id = e.id
+join
   addresses a on o.address_id = a.id
-limit 20;
+  limit 20;

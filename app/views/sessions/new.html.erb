@@ -8,7 +8,6 @@
 
 <%= form_with model: @employee, url: employee_session_path, :html => {:id => 'login_form'}, method: :post do |form| %>
   <fieldset>
-
     <field>
       <label for="employee_email">Email</label>
       <input name="employee[email]" id="employee_email">
@@ -17,6 +16,9 @@
       <label for="employee_password">Password</label>
       <input name="employee[password]" type="password" id="employee_password">
     </field>
-
+    <field>
+      <label for="employee_remember_me">Remember me</label>
+      <input name="employee[remember_me]" type="checkbox" id="employee_remember_me" checked>
+    </field>
   </fieldset>
 <% end %>

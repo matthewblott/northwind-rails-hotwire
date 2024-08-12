@@ -8,9 +8,11 @@
     data: { controller: 'bridge--edit', bridge__edit_target: "submit" },
     role: "button" %>
 
-  <%= link_to "Addresses", index_customer_address_path(@customer),
-    data: { controller: 'bridge--link-to', bridge__link_to_target: "submit", bridge_title: 'Addresses' },
-    role: "button" %>
+  <% unless turbo_native_ios? %>
+    <%= link_to "Addresses", index_customer_address_path(@customer),
+      data: { controller: 'bridge--link-to', bridge__link_to_target: "submit", bridge_title: 'Addresses' },
+      role: "button" %>
+  <% end %>
 
   <%= link_to "Back", index_customer_path, role: "button" %>
 

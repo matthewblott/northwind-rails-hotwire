@@ -57,7 +57,7 @@ class EmployeesController < ApplicationController
     password = "password"
     @employee.password = password
     @employee.password_confirmation = password
-
+     
     if @employee.save
       redirect_to(show_employee_path(@employee), notice: "Employee was successfully created.")
     else

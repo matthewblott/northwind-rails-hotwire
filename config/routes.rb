@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   get("employee_orders/index")
   devise_for(:employees, controllers: {sessions: "sessions"})
-  resources(:login, only: [:index])
-
 
   get("/turbo-logout", to: "turbo#logout")
 

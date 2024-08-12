@@ -24,4 +24,12 @@
 
 </controls>
 
+<% if turbo_native_ios? %>
+  <field>
+    <%#= link_to "Addresses", index_employee_address_path(@employee), role: "button", style: "width: 100%; margin-bottom: 15px" %>
+    <%#= link_to "Orders", index_employee_order_path(@employee), role: "button", style: "width: 100%" %>
+  </field>
+<% end %>
+
 <%= render "form", employee: @employee, disabled: true %>
+

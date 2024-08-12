@@ -9,6 +9,17 @@
     <%= text_field(@employee, :title_of_courtesy) %>
     <%= text_field(@employee, :first_name) %>
     <%= text_field(@employee, :last_name) %>
+
+    <% if turbo_native_ios? %>
+      <field>
+        <% if @employee.id == nil %>
+          <%= link_to "Addresses", '/', role: "button", style: "width: 100%; margin-top: 15px; margin-bottom: 5px;", disabled: true %>
+        <% else %>
+          <%= link_to "Addresses", index_employee_address_path(@employee), role: "button", style: "width: 100%; margin-top: 15px; margin-bottom: 5px;" %>
+        <% end %>
+      </field>
+    <% end %>
+
     <!-- Reports To -->
     <%= render partial: "search_field", locals: { 
       field_name: :reports_to,
@@ -27,6 +38,17 @@
     <%= date_field(@employee, :hire_date) %>
     <%= text_field(@employee, :home_phone) %>
     <%= number_field(@employee, :extension) %>
+
+    <% if turbo_native_ios? %>
+      <field>
+        <% if @employee.id == nil %>
+          <%= link_to "Orders", '/', role: "button", style: "width: 100%; margin-top: 15px; margin-bottom: 5px;", disabled: true %>
+        <% else %>
+          <%= link_to "Orders", index_employee_order_path(@employee), role: "button", style: "width: 100%; margin-top: 15px; margin-bottom: 5px;" %>
+        <% end %>
+      </field>
+    <% end %>
+
     <%= text_field(@employee, :photo) %>
   </fieldset>
 <% end %>
