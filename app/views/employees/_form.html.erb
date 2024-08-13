@@ -10,6 +10,7 @@
     <%= text_field(@employee, :first_name) %>
     <%= text_field(@employee, :last_name) %>
 
+    <!-- Addresses -->
     <% if turbo_native_ios? %>
       <field>
         <% if @employee.id == nil %>
